@@ -1,3 +1,9 @@
 require("!style-loader!css-loader!sass-loader!../styles/main.scss");
+import React, {Component} from 'react';
+import ReactDOM from 'react-dom';
+import App from './components/App.js';
 
-console.log("Hello World!");
+ReactDOM.render(
+  <App/>,
+  document.getElementById('root')
+);
