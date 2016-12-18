@@ -1,6 +1,6 @@
 import React, {Component} from 'react';
 
-export default class Menu extends Component{
+export default class LargeButton extends Component{
   static propTypes={
     title: React.PropTypes.string,
     onMouseEnter: React.PropTypes.func,

@@ -11,6 +11,7 @@ export default class About extends Component{
         <div className='content'>
           <h1>About</h1>
           <p>Made by Juho Jokela & Ilpo Oksanen</p>
+          <p>Built using React.</p>
         </div>
       </div>
     );

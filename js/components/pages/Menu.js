@@ -1,12 +1,7 @@
 import React, {Component} from 'react';
-import Largebutton from '../reusable/Largebutton';
+import LargeButton from '../reusable/LargeButton';
 
 export default class Menu extends Component{
-
-  static propTypes={
-    navigate: React.PropTypes.func,
-    setKeybinds: React.PropTypes.func,
-  }
 
   state={
     selected: 0,
@@ -74,10 +69,9 @@ export default class Menu extends Component{
   render (){
     return (
       <div id="menu" className="page">
-        <h1>Corejumper 0.1.0</h1>
         <div id="menu-buttons">
           {this.state.options.map((e,i)=>
-            <Largebutton 
+            <LargeButton 
               key={i} 
               title={e.title} 
               selected={this.state.selected==i} 

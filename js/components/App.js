@@ -49,6 +49,7 @@ export default class App extends Component{
 
   render (){
     return <div id="app">
+      <h1>Corejumper 0.1.0</h1>
       <Router history={hashHistory}>
         <Route path='/' component={RouteRenderer}>
           <IndexRoute component={Menu}/>

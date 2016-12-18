@@ -38,7 +38,8 @@
     position: absolute;
     top: 50%;
     left: 30%;
-    
+    user-select: none;
+      
     font-size: .8em;
     
     transform: translate(0, -50%);

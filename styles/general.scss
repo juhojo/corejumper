@@ -1,14 +1,25 @@
 #root{
   width: 100vw;
   height: 100vh;
+  font-family: Raleway;
 }
 
 #app, #route-renderer{
   height: 100%;
 }
 
+#app{
+  & > h1{
+    position: absolute;
+    right: 0;
+    bottom: 0;
+    padding: 2vh;
+    color: grey;
+    font-size: 2.5vh;
+  }
+}
+
 .page{
-  font-family: Raleway;
   position: relative;
   height: 100%;
 }
@@ -22,6 +33,7 @@
   transform: translate(-50%, -50%);
   text-align: center;
   font-size: 3.5vh;
+  pointer-events: none;
   
   & h1{
     font-size: 3em;
