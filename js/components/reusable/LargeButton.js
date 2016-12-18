@@ -15,7 +15,7 @@ export default class LargeButton extends Component{
       <div 
         onClick={this.props.onClick} 
         onMouseEnter={this.props.onMouseEnter}
-        className={`largebutton ${classes}`} ref={input=>{this.element=input;}}>
+        className={`large-button ${classes}`} ref={input=>{this.element=input;}}>
         {title}
       </div>
     );
