@@ -1,0 +1,55 @@
+.largebutton{
+  position: relative;
+  width: 8.5em;
+  font-size: 50px;
+  line-height: 1.7em;
+  padding: 0 1em;
+  text-align: center;
+  font-family: Raleway;
+  font-weight: 400;
+  text-transform: uppercase;
+  
+  &:hover{
+    cursor: pointer;
+  }
+  
+  &.selected::before, &.selected::after{
+    content: '';
+    display: block;
+    position: absolute;
+    top: 50%;
+    left: .85em;
+    
+    transform-origin: 0 0;
+    width: .8em;
+    height: .8em;
+    background: transparent;
+    border: .08em solid black;
+    border-width: 0 0 .08em .08em;
+    transform: translateY(-70.7%) translateX(0) rotate(45deg);
+    animation: pulse ease-in-out 1.2s infinite alternate;
+  }
+
+  &.selected::after{
+    left: auto;
+    right: .30em;
+    border-width: .08em .08em 0 0;
+    animation: pulse-reverse ease-in-out 1.2s infinite alternate;
+  }
+}
+
+
+@mixin pulse-animation($name, $start, $end){
+  @keyframes #{$name} {
+    0% {
+      transform: translateY(-70.7%) translateX($start) rotate(45deg);
+    }
+    100% {
+      transform: translateY(-70.7%) translateX($end) rotate(45deg);
+    }
+  }
+}
+
+
+@include pulse-animation('pulse', 0, 50%);
+@include pulse-animation('pulse-reverse', 50%, 0);

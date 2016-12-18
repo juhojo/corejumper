@@ -1,0 +1,24 @@
+#menu{  
+  text-align: center;
+  
+  & #menu-buttons{
+    width: 100%;
+    position: absolute;
+    top: 50%;
+    transform: translateY(-50%);
+  }
+
+  & .largebutton{
+    font-size: 8vh;
+    margin: 0 auto;
+  }
+
+  & > h1{
+    position: absolute;
+    right: 0;
+    bottom: 0;
+    padding: 2vh;
+    color: grey;
+    font-size: 2.5vh;
+  }
+}

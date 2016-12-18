@@ -1,0 +1,68 @@
+.menu-button{
+  position: absolute;
+  top: 3vh;
+  left: 3vh;
+  font-size: 6vh;
+
+  height: 1em;
+  width: 1em;
+  padding: .45em 0;
+  box-sizing: border-box;
+  background-color: black;
+  background-clip: content-box;
+  transition: all .3s;
+  
+  
+  &::before, &::after{
+    content: '';
+    position: absolute;
+    left: 0;
+
+    width: 1em;
+    height: .1em;
+    background-color: black;
+    display: block;
+
+    transition: transform .3s;
+  }
+  
+  &::before{
+    top: 0;
+  }
+
+  &::after{
+    bottom: 0;
+  }
+  
+  & div{
+    position: absolute;
+    top: 50%;
+    left: 30%;
+    
+    font-size: .8em;
+    
+    transform: translate(0, -50%);
+    opacity: 0;
+    transition: transform .3s .1s, opacity .2s;
+  }
+  
+  &:hover{
+    cursor: pointer;
+    transform: translateX(.2em);
+    padding-right: 1em;
+    
+    &::before{
+      transform: translate(-.3em, .23em) rotate(-45deg) scaleX(.7);
+    }
+
+    &::after{
+      transform: translate(-.3em, -.23em) rotate(45deg) scaleX(.7);
+    }
+    
+    & div{
+      transform: translate(20%, -50%);
+      opacity: 1;
+      transition: transform .3s, opacity .3s;
+    }
+  }
+}
