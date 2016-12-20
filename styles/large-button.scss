@@ -57,3 +57,21 @@
 
 @include pulse-animation('pulse', 0, 50%);
 @include pulse-animation('pulse-reverse', 50%, 0);
+
+.leaving .large-button{
+    
+    &.selected::before{
+      transition: transform .5s, opacity .5s;
+      animation: none;
+      transform: translateY(-70.7%) translateX(100%) rotate(45deg);
+      opacity: 0;
+    }
+
+    &.selected::after{
+      transition: transform .5s, opacity .5s;
+      animation: none;
+      transform: translateY(-70.7%) translateX(-50%) rotate(45deg);
+      opacity: 0;
+    }
+  
+}
