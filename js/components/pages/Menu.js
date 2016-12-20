@@ -71,10 +71,10 @@ export default class Menu extends Component{
       <div id="menu" className="page">
         <div id="menu-buttons">
           {this.state.options.map((e,i)=>
-            <LargeButton 
-              key={i} 
-              title={e.title} 
-              selected={this.state.selected==i} 
+            <LargeButton
+              key={i}
+              title={e.title}
+              selected={this.state.selected==i}
               onMouseEnter={this.mouseoverHandler.bind(this, i)}
               onClick={this.clickHandler.bind(this, i)}
             />
@@ -83,5 +83,5 @@ export default class Menu extends Component{
       </div>
     );
   }
-  
+
 }

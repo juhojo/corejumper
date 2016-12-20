@@ -1,13 +1,19 @@
 import React, {Component} from 'react';
+import ReactDOM from 'react-dom';
 import Menu from './pages/Menu.js';
 import Game from './pages/Game.js';
 import Guide from './pages/Guide.js';
 import Settings from './pages/Settings.js';
 import About from './pages/About.js';
 import { Router, Route, IndexRoute, Link, hashHistory } from 'react-router';
+import TransitionGroup from 'react-addons-transition-group';
 
 class RouteRenderer extends Component{
   keybinds={};
+
+  componentDidMount(){
+    window.addEventListener('keydown',this.keydownHandler);
+  }
 
   navigate(url){
     hashHistory.push(url);
@@ -28,18 +34,17 @@ class RouteRenderer extends Component{
     }
   }
 
-  componentDidMount(){
-    window.addEventListener('keydown',this.keydownHandler);
-  }
-
   render(){
     return (
       <div id="route-renderer">
-        {React.cloneElement(this.props.children, {
-          navigate: this.navigate.bind(this),
-          exit: this.exit.bind(this),
-          setKeybinds: this.setKeybinds.bind(this),
-        })}
+        <TransitionGroup component="div" className="full-height">
+          {React.cloneElement(this.props.children, {
+            key: this.props.location.pathname,
+            navigate: this.navigate.bind(this),
+            exit: this.exit.bind(this),
+            setKeybinds: this.setKeybinds.bind(this),
+          })}
+        </TransitionGroup>
       </div>
     );
   }

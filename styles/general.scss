@@ -4,6 +4,10 @@
   font-family: Raleway;
 }
 
+.full-height {
+  height: 100%;
+}
+
 #app, #route-renderer{
   height: 100%;
 }
@@ -34,7 +38,7 @@
   text-align: center;
   font-size: 3.5vh;
   pointer-events: none;
-  
+
   & h1{
     font-size: 3em;
     font-weight: 300;
