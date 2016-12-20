@@ -10,6 +10,10 @@ import TransitionGroup from 'react-addons-transition-group';
 import {Sine} from 'gsap';
 
 class RouteRenderer extends Component{
+  state={
+    selectedMenu:0,
+  }
+
   keybinds={};
 
   transition = {
@@ -46,6 +50,10 @@ class RouteRenderer extends Component{
     }
   }
 
+  setSelectedMenu=selectedMenu=>{
+    this.setState({selectedMenu});
+  }
+
   render(){
     return (
       <div id="route-renderer">
@@ -56,6 +64,8 @@ class RouteRenderer extends Component{
             exit: this.exit.bind(this),
             setKeybinds: this.setKeybinds.bind(this),
             transition: this.transition,
+            selectedMenu: this.state.selectedMenu,
+            setSelectedMenu: this.setSelectedMenu,
           })}
         </TransitionGroup>
       </div>

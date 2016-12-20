@@ -8,7 +8,6 @@ export default class Menu extends Component{
   el = null;
 
   state={
-    selected: 0,
     options: [
       {
         title: 'Play',
@@ -59,39 +58,38 @@ export default class Menu extends Component{
     );
   }
 
-  navigateToSelected=()=>{
-    this.props.navigate(this.state.options[this.state.selected].target);
+  updateOrigin=target=>{
+    const targetRect=target.getBoundingClientRect();
+    this.props.transition.setOrigin(
+      `${window.innerWidth / 2}px ${targetRect.top + (targetRect.height / 2)}px`
+    );
   }
 
-  select(which){
-    this.setState({
-      selected: which,
-    });
+  navigateToSelected=()=>{
+    this.updateOrigin(ReactDOM.findDOMNode(this.refs[`button${this.props.selectedMenu}`]));
+    this.props.navigate(this.state.options[this.props.selectedMenu].target);
   }
 
   moveUp=()=>{
-    this.state.selected==0
-      ? this.select(this.state.options.length-1)
-      : this.select(this.state.selected-1)
+    this.props.selectedMenu==0
+      ? this.props.setSelectedMenu(this.state.options.length-1)
+      : this.props.setSelectedMenu(this.props.selectedMenu-1)
     ;
   }
 
   moveDown=()=>{
-    this.state.selected==this.state.options.length-1
-      ? this.select(0)
-      : this.select(this.state.selected+1)
+    this.props.selectedMenu==this.state.options.length-1
+      ? this.props.setSelectedMenu(0)
+      : this.props.setSelectedMenu(this.props.selectedMenu+1)
     ;
   }
 
   mouseoverHandler(i,e){
-    this.select(i);
+    this.props.setSelectedMenu(i);
   }
 
   clickHandler(i,e){
-    const targetRect=e.target.getBoundingClientRect();
-    this.props.transition.setOrigin(
-      `${window.innerWidth / 2}px ${targetRect.top + (targetRect.height / 2)}px`
-    );
+    this.updateOrigin(e.target);
     this.props.navigate(this.state.options[i].target);
   }
 
@@ -102,8 +100,9 @@ export default class Menu extends Component{
           {this.state.options.map((e,i)=>
             <LargeButton
               key={i}
+              ref={`button${i}`}
               title={e.title}
-              selected={this.state.selected==i}
+              selected={this.props.selectedMenu==i}
               onMouseEnter={this.mouseoverHandler.bind(this, i)}
               onClick={this.clickHandler.bind(this, i)}
             />
