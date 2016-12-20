@@ -10,6 +10,15 @@ import TransitionGroup from 'react-addons-transition-group';
 
 class RouteRenderer extends Component{
   keybinds={};
+  transformOrigin = {
+    value: '',
+    set(val){
+      this.value = val;
+    },
+    get(){
+      return this.value;
+    }
+  };
 
   componentDidMount(){
     window.addEventListener('keydown',this.keydownHandler);
@@ -43,6 +52,7 @@ class RouteRenderer extends Component{
             navigate: this.navigate.bind(this),
             exit: this.exit.bind(this),
             setKeybinds: this.setKeybinds.bind(this),
+            transformOrigin: this.transformOrigin,
           })}
         </TransitionGroup>
       </div>
