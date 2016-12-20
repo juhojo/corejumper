@@ -1,11 +1,12 @@
 import React, {Component} from 'react';
 import ReactDOM from 'react-dom';
 import LargeButton from '../reusable/LargeButton';
-import TweenMax from 'gsap';
+import TweenMax, {Sine, Elastic} from 'gsap';
 
 export default class Menu extends Component{
 
   el = null;
+
   state={
     selected: 0,
     options: [
@@ -39,25 +40,23 @@ export default class Menu extends Component{
   }
 
   componentWillEnter(callback) {
-
-    TweenMax.fromTo(this.el, 3, {transform: 'scale(6)', opacity: 0}, {transform: 'scale(1)', opacity: 1, onComplete: callback});
-
-    // this.el.transition="all 0";
-    // this.el.style.transform="scale(6)";
-    // this.el.style.opacity=0;
-    // this.el.transition="transform .5s, opacity .5s";
-    // this.el.style.transformOrigin = this.props.transformOrigin;
-    // this.el.style.transform="scale(1)";
-    // this.el.style.opacity=1;
-    // setTimeout(callback, 500);
+    const {transition} = this.props;
+    this.el.style.transformOrigin=transition.origin;
+    TweenMax.fromTo(
+      this.el, transition.time, 
+      {transform: `scale(${transition.scale})`, opacity: 0}, 
+      {transform: 'scale(1)', opacity: 1, onComplete: callback, ease: transition.ease}
+    );
   }
+
   componentWillLeave(callback) {
-    this.el.className += " leaving";
-    this.el.style.transformOrigin = this.props.transformOrigin;
-    // this.el.style.transform="scale(6)";
-    // this.el.style.opacity=0;
-    // setTimeout(callback, 500);
-    TweenMax.fromTo(this.el, 3, {transformOrigin: this.props.transformOrigin, transform: 'scale(1)', opacity: 1}, {transform: 'scale(6)', opacity: 0, onComplete: callback});
+    const {transition} = this.props;
+    this.el.style.transformOrigin = transition.origin;
+    TweenMax.fromTo(
+      this.el, transition.time, 
+      {transform: 'scale(1)', opacity: 1}, 
+      {transform: `scale(${transition.scale})`, opacity: 0, onComplete: callback, ease: transition.ease}
+    );
   }
 
   navigateToSelected=()=>{
@@ -89,8 +88,10 @@ export default class Menu extends Component{
   }
 
   clickHandler(i,e){
-    // console.log(this.props.transformOrigin);
-    this.props.transformOrigin.set(`${window.innerWidth / 2}px ${e.target.offsetTop + (e.target.getBoundingClientRect().height / 2)}px`);
+    const targetRect=e.target.getBoundingClientRect();
+    this.props.transition.setOrigin(
+      `${window.innerWidth / 2}px ${targetRect.top + (targetRect.height / 2)}px`
+    );
     this.props.navigate(this.state.options[i].target);
   }
 

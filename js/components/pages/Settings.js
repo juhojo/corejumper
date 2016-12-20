@@ -1,18 +1,14 @@
-import React, {Component} from 'react';
-import DefaultPageNavigation from '../reusable/DefaultPageNavigation';
-import MenuButton from '../MenuButton';
+import React from 'react';
+import SubPage from '../reusable/SubPage.js';
+import SubPageContent from '../reusable/SubPageContent.js';
 
-export default class Settings extends Component{
+export default class Settings extends SubPage{
   render (){
     return (
-      <div id="settings" className="page">
-        <DefaultPageNavigation exit={this.props.exit} setKeybinds={this.props.setKeybinds}/>
-        <MenuButton exit={this.props.exit} />
-        <div className='content'>
+      <SubPageContent {...this.props}>
           <h1>Settings</h1>
-          <p>Nothing to change yet ¯\_(ツ)_/¯</p>
-        </div>
-      </div>
+          <p>Nothing to change yet! ¯\_(ツ)_/¯</p>
+      </SubPageContent>
     );
   }
 }

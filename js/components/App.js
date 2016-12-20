@@ -7,21 +7,24 @@ import Settings from './pages/Settings.js';
 import About from './pages/About.js';
 import { Router, Route, IndexRoute, Link, hashHistory } from 'react-router';
 import TransitionGroup from 'react-addons-transition-group';
+import {Sine} from 'gsap';
 
 class RouteRenderer extends Component{
   keybinds={};
-  transformOrigin = {
-    value: '',
-    set(val){
-      this.value = val;
-    },
-    get(){
-      return this.value;
+
+  transition = {
+    time: .3,
+    scale: 6,
+    origin: `${window.innerWidth/2}px ${window.innerHeight/2}px`,
+    ease: Sine.easeInOut,
+
+    setOrigin(val){
+      this.origin = val;
     }
   };
 
   componentDidMount(){
-    window.addEventListener('keydown',this.keydownHandler);
+    window.addEventListener('keydown', this.keydownHandler);
   }
 
   navigate(url){
@@ -52,7 +55,7 @@ class RouteRenderer extends Component{
             navigate: this.navigate.bind(this),
             exit: this.exit.bind(this),
             setKeybinds: this.setKeybinds.bind(this),
-            transformOrigin: this.transformOrigin,
+            transition: this.transition,
           })}
         </TransitionGroup>
       </div>
