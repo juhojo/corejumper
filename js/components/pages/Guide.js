@@ -3,7 +3,7 @@ import SubPage from '../reusable/SubPage.js';
 import SubPageContent from '../reusable/SubPageContent.js';
 import KeyboardKey from '../reusable/KeyboardKey';
 
-export default class About extends SubPage{
+export default class Guide extends SubPage{
   render (){
     return (
       <SubPageContent {...this.props}>

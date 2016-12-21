@@ -30,20 +30,20 @@ export default class Menu extends Component{
 
   componentDidMount(){
     this.el = ReactDOM.findDOMNode(this);
-    this.props.setKeybinds({
-      38: this.moveUp,
-      40: this.moveDown,
-      13: this.navigateToSelected,
-      39: this.navigateToSelected,
-    });
+    this.setKeybinds();
+  }
+
+  componentDidEnter(){
+    // If users decide to spam navigation buttons will reset the keys.
+    this.setKeybinds();
   }
 
   componentWillEnter(callback) {
     const {transition} = this.props;
     this.el.style.transformOrigin=transition.origin;
     TweenMax.fromTo(
-      this.el, transition.time, 
-      {transform: `scale(${transition.scale})`, opacity: 0}, 
+      this.el, transition.time,
+      {transform: `scale(${transition.scale})`, opacity: 0},
       {transform: 'scale(1)', opacity: 1, onComplete: callback, ease: transition.ease}
     );
   }
@@ -52,10 +52,19 @@ export default class Menu extends Component{
     const {transition} = this.props;
     this.el.style.transformOrigin = transition.origin;
     TweenMax.fromTo(
-      this.el, transition.time, 
-      {transform: 'scale(1)', opacity: 1}, 
+      this.el, transition.time,
+      {transform: 'scale(1)', opacity: 1},
       {transform: `scale(${transition.scale})`, opacity: 0, onComplete: callback, ease: transition.ease}
     );
+  }
+
+  setKeybinds() {
+    this.props.setKeybinds({
+      38: this.moveUp,
+      40: this.moveDown,
+      13: this.navigateToSelected,
+      39: this.navigateToSelected,
+    });
   }
 
   updateOrigin=target=>{

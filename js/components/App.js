@@ -12,7 +12,7 @@ import {Sine} from 'gsap';
 class RouteRenderer extends Component{
   state={
     selectedMenu:0,
-  }
+  };
 
   keybinds={};
 
