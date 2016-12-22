@@ -28,10 +28,18 @@ export default class Levels extends SubPage{
 
   componentDidMount(nextProps) {
     super.componentDidMount();
-    const gridRect = ReactDOM.findDOMNode(this.refs.grid).getBoundingClientRect();
+    window.addEventListener('resize', this.handleResize);
+    this.setGridRect(ReactDOM.findDOMNode(this.refs.grid).getBoundingClientRect());
+  }
+
+  handleResize=e=>{
+    this.setGridRect(ReactDOM.findDOMNode(this.refs.grid).getBoundingClientRect());
+  }
+
+  setGridRect(rect){
     this.setState({
-      scrollbarWidth: gridRect.width,
-      scrollbarHeight: gridRect.height,
+      scrollbarWidth: rect.width,
+      scrollbarHeight: rect.height,
     });
   }
 
@@ -39,26 +47,31 @@ export default class Levels extends SubPage{
     const { scrollbarWidth, scrollbarHeight } = this.state;
     return (
       <SubPageContent {...this.props}>
-        <h1>Levels</h1>
-        <div ref="grid" className="grid">
-          <Scrollbars
-            style={{ width: scrollbarWidth, height: scrollbarHeight }}
-            renderThumbHorizontal={props => <div {...props} className="thumb-horizontal"/>}
-            renderTrackHorizontal={props => <div {...props} className="track-horizontal"/>}>
-            <div className="grid-content" style={{ width: `${this.levels.length * 160}px` }}>
-              {this.levels.map((level, i) =>
-                <GridItem
-                  key={i}
-                  number={level.number}
-                  name={level.name}
-                  currentLevel={this.props.currentLevel}
-                  setCurrentLevel={this.props.currentLevel}
-                  onMouseEnter={this.setSelectedLevel.bind(this, i)}
-                  selected={this.state.selectedLevel === level.number}
-                />
-              )}
-            </div>
-          </Scrollbars>
+        <div className="flexible-content">
+          <div ref="grid" className="grid">
+            <Scrollbars
+              style={{ width: scrollbarWidth, height: scrollbarHeight }}
+              renderThumbVertical={props => <div {...props} className="thumb-vertical"/>}
+              renderTrackVertical={props => <div {...props} className="track-vertical"/>}>
+              <div className="grid-content" style={{ height: `${this.levels.length * 160}px` }}>
+                {this.levels.map((level, i) =>
+                  <GridItem
+                    key={i}
+                    number={level.number}
+                    name={level.name}
+                    currentLevel={this.props.currentLevel}
+                    setCurrentLevel={this.props.currentLevel}
+                    onMouseEnter={this.setSelectedLevel.bind(this, i)}
+                    selected={this.state.selectedLevel === level.number}
+                  />
+                )}
+              </div>
+            </Scrollbars>
+          </div>
+          <div>
+            <h1>Levels</h1>
+            <p>Some content...</p>
+          </div>
         </div>
       </SubPageContent>
     );

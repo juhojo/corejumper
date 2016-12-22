@@ -1,29 +1,38 @@
-.thumb-horizontal {
+.thumb-vertical {
   background: grey;
   height: 100%;
   width: 100%;
 }
 
-.track-horizontal {
+.track-vertical {
   background: lightgray;
-  height: 20px !important;
-  width: calc(100% - 20px) !important;
-  margin: 0 10px;
+  height: 100%;
+  width: 1em !important;
+  margin: 10 0px;
   bottom: 0;
+  right: 0;
 }
 
 .grid {
   display: block;
-  height: 200px;
+  width: 7em;
+  height: 50vh;
   pointer-events: auto;
 
   & .grid-content {
     & .grid-item {
       float: left;
-      width: 140px;
-      height: 140px;
+      width: calc(6em - 20px);
+      height: calc(6em - 20px);
       margin: 10px;
       border: 2px solid black;
+
+      &:last-of-type{
+        margin-bottom: 0;
+      }
+      &:first-of-type{
+        margin-top: 0;
+      }
 
       &.selected {
         border: 2px solid transparent;
