@@ -4,11 +4,11 @@ import MenuButton from '../MenuButton';
 export default class SubPageContent extends Component{
   render (){
     return (
-      <div className="page sub-page">
-        <MenuButton exit={this.props.exit} />
-        <div className='content'>
+      <div id={this.props.id} className="page sub-page">
+        <div className='content' style={this.props.style}>
           {this.props.children}
         </div>
+        <MenuButton exit={this.props.exit} />
       </div>
     );
   }

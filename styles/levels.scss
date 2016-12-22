@@ -1,0 +1,35 @@
+#levels{
+  & .title{
+    overflow: hidden;
+    padding: 0;
+    text-align: right;
+    padding: 1vh;
+    padding-right: 1vh;
+    box-shadow: inset 0 0 0 1px blue;
+    
+    &>h1{
+      margin: 0;
+    }
+  }
+
+  & .level-details{
+    position: absolute;
+    top: 12vh;
+    left: calc(23vh + 26px);
+    
+    width: calc(100vw - 23vh - 26px);
+    height: 88vh;
+    box-shadow: inset 0 0 0 1px green;
+    
+    & .container{
+      max-height: 100%;
+      position: absolute;
+      top: 50%;
+      transform: translateY(-50%);
+      
+      & h2{
+        font-size: 2em;
+      }
+    }
+  }
+}

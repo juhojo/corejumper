@@ -1,67 +1,100 @@
-.thumb-horizontal {
-  background: grey;
-  height: 100%;
-  width: 100%;
-}
-
-.track-horizontal {
-  background: lightgray;
-  height: 20px !important;
-  width: calc(100% - 20px) !important;
-  margin: 0 10px;
-  bottom: 0;
-}
-
 .grid {
-  display: block;
-  height: 200px;
-  pointer-events: auto;
+  position: absolute;
+  top: 12vh;
+  left: 2vh;
+  width: calc(21vh + 26px);
+  height: 88vh;
+  box-shadow: inset 0 0 0 1px red;
+  
+  & .grid-item {
+    width: 18vh;
+    height: 18vh;
+    margin-bottom: 2vh;
+    border: 2px solid black;
 
-  & .grid-content {
-    & .grid-item {
-      float: left;
-      width: 140px;
-      height: 140px;
-      margin: 10px;
-      border: 2px solid black;
+    &:last-of-type{
+      margin-bottom: 0;
+    }
+    
+    &::before,&::after{
+      content: '';
+      position: absolute;
+      background: white;
+      transition: all .3s;
+    }
 
-      &.selected {
-        border: 2px solid transparent;
-        border-bottom: 2px solid black;
-        animation: pulsingBorder 1s infinite;
+    &::before{
+      width: 0;
+      height: 110%;
+      top: -5%;
+      left: 50%;
+      transform: translateX(-50%);
+    }
+
+    &::after{
+      width: 110%;
+      height: 0;
+      top: 50%;
+      left: -5%;
+      transform: translateY(-50%);
+    }
+
+    &.selected:not(.locked) {
+      animation: pulsingBorder 1.8s infinite;
+    
+      &::before{
+        width: 60%;
       }
 
-      &.finished {
-        background-color: lightgrey;
-        color: white;
-        border-color: lightgrey;
+      &::after{
+        height: 60%;
       }
+      
+      & .grid-item-content{
+        animation: scaleBack 1.8s infinite;
+      }
+    }
 
-      & .grid-item-content {
-        position: absolute;
-        top: 50%;
-        left: 50%;
-        transform: translate(-50%, -50%);
-        & span{
-          pointer-events: none;
-          display: inline-block;
-        }
+    &.locked {
+      background-color: lightgrey;
+      color: white;
+      border-color: lightgrey;
+      cursor: not-allowed;
+    }
+
+    & .grid-item-content {
+      position: absolute;
+      top: 50%;
+      left: 50%;
+      transform: translate(-50%, -50%);
+      z-index: 1;
+      & span{
+        display: inline-block;
       }
     }
   }
 }
 
+@keyframes scaleBack{
+  0%{
+    transform: translate(-50%, -50%) scale(1);
+  }
+  50%{
+    transform: translate(-50%, -50%) scale(0.88888);
+  }
+  100%{
+    transform: translate(-50%, -50%) scale(1);
+  }
+}
+
 @keyframes pulsingBorder {
-  0% {
-    border-bottom-color: #000;
+  0%{
+    transform: scale(1);
   }
-  45% {
-    border-bottom-color: #000;
+  50%{
+    transform: scale(1.125);
   }
-  55% {
-    border-bottom-color: #FFF;
-  }
-  100% {
-    border-bottom-color: #FFF;
+  100%{
+    transform: scale(1);
   }
 }

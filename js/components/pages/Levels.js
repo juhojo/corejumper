@@ -3,7 +3,8 @@ import ReactDOM from 'react-dom';
 import SubPage from '../reusable/SubPage.js';
 import SubPageContent from '../reusable/SubPageContent.js';
 import GridItem from '../reusable/GridItem';
-import { Scrollbars } from 'react-custom-scrollbars';
+import Scrollbar from '../reusable/Scrollbar';
+import LargeButton from '../reusable/LargeButton';
 
 export default class Levels extends SubPage{
   levels = [
@@ -28,24 +29,28 @@ export default class Levels extends SubPage{
 
   componentDidMount(nextProps) {
     super.componentDidMount();
-    const gridRect = ReactDOM.findDOMNode(this.refs.grid).getBoundingClientRect();
+    window.addEventListener('resize', this.handleResize);
+    this.setGridRect(ReactDOM.findDOMNode(this.refs.grid).getBoundingClientRect());
+  }
+
+  handleResize=e=>{
+    this.setGridRect(ReactDOM.findDOMNode(this.refs.grid).getBoundingClientRect());
+  }
+
+  setGridRect(rect){
     this.setState({
-      scrollbarWidth: gridRect.width,
-      scrollbarHeight: gridRect.height,
+      scrollbarWidth: rect.width,
+      scrollbarHeight: rect.height,
     });
   }
 
   render (){
     const { scrollbarWidth, scrollbarHeight } = this.state;
     return (
-      <SubPageContent {...this.props}>
-        <h1>Levels</h1>
+      <SubPageContent {...this.props} style={{height: '100%'}} id="levels">
         <div ref="grid" className="grid">
-          <Scrollbars
-            style={{ width: scrollbarWidth, height: scrollbarHeight }}
-            renderThumbHorizontal={props => <div {...props} className="thumb-horizontal"/>}
-            renderTrackHorizontal={props => <div {...props} className="track-horizontal"/>}>
-            <div className="grid-content" style={{ width: `${this.levels.length * 160}px` }}>
+          <Scrollbar>
+            <div style={{padding: 10}}>
               {this.levels.map((level, i) =>
                 <GridItem
                   key={i}
@@ -58,7 +63,22 @@ export default class Levels extends SubPage{
                 />
               )}
             </div>
-          </Scrollbars>
+          </Scrollbar>
+        </div>
+        <div className="title">
+          <h1>Levels</h1>
+        </div>
+        <div className="level-details">
+          <div className="container">
+            <h2>Level 3</h2>
+            <p>You've unlocked this level, but are yet to beat it.</p>
+            <p>Attempts: 9</p>
+            <p>Best score: 13</p>
+            <LargeButton
+                title="Play"
+                selected={true}
+            />
+          </div>
         </div>
       </SubPageContent>
     );
