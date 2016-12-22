@@ -34,6 +34,6 @@ export default class About extends Component{
   }
 
   render (){
-    return <div id="about" className="page"></div>;
+    return <div className="page"></div>;
   }
 }

@@ -14,6 +14,10 @@ export default class Menu extends Component{
         target: '/game',
       },
       {
+        title: 'Levels',
+        target: '/levels',
+      },
+      {
         title: 'Guide',
         target: '/guide',
       },

@@ -1,0 +1,53 @@
+.grid {
+  display: block;
+  overflow-x: auto;
+
+  & .grid-content {
+    & .grid-item {
+      pointer-events: auto;
+      float: left;
+      width: 140px;
+      height: 140px;
+      margin: 10px;
+      border: 2px solid black;
+
+      &.selected {
+        border: 2px solid transparent;
+        border-bottom: 2px solid black;
+        animation: pulsingBorder 1s infinite;
+      }
+
+      &.finished {
+        background-color: lightgrey;
+        color: white;
+        border-color: lightgrey;
+      }
+
+      & .grid-item-content {
+        position: absolute;
+        top: 50%;
+        left: 50%;
+        transform: translate(-50%, -50%);
+        & span{
+          pointer-events: none;
+          display: inline-block;
+        }
+      }
+    }
+  }
+}
+
+@keyframes pulsingBorder {
+  0% {
+    border-bottom-color: #000;
+  }
+  45% {
+    border-bottom-color: #000;
+  }
+  55% {
+    border-bottom-color: #FFF;
+  }
+  100% {
+    border-bottom-color: #FFF;
+  }
+}

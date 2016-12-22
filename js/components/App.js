@@ -1,17 +1,30 @@
 import React, {Component} from 'react';
 import ReactDOM from 'react-dom';
-import Menu from './pages/Menu.js';
-import Game from './pages/Game.js';
-import Guide from './pages/Guide.js';
-import Settings from './pages/Settings.js';
-import About from './pages/About.js';
 import { Router, Route, IndexRoute, Link, hashHistory } from 'react-router';
 import TransitionGroup from 'react-addons-transition-group';
 import {Sine} from 'gsap';
+import Menu from './pages/Menu.js';
+import Game from './pages/Game.js';
+import Levels from './pages/Levels.js';
+import Guide from './pages/Guide.js';
+import Settings from './pages/Settings.js';
+import About from './pages/About.js';
 
 class RouteRenderer extends Component{
   state={
     selectedMenu:0,
+    userProgress: 0, // User's progress in game. Which level they have reached.
+    currentLevel: {
+      number: 3,
+      name: 'Practise',
+      length: 10 * Math.PI, // Length of the level: How many rotations. Example: 5 laps.
+      bodies: {
+        player: {},
+        boxes: [{}],
+        circles: [{}],
+        core: [{}, {}], // Amout of the level circles. Example: outer + inner.
+      }
+    },
   };
 
   keybinds={};
@@ -54,6 +67,14 @@ class RouteRenderer extends Component{
     this.setState({selectedMenu});
   }
 
+  setCurrentLevel=number=>{
+    // TODO Fetch the level data by level number.
+    console.log(number);
+    const { userProgress } = this.state;
+    if (number <= userProgress) console.log("Change level."); // Go to level
+    else console.log("Show some message."); // Prevent.
+  }
+
   render(){
     return (
       <div id="route-renderer">
@@ -66,6 +87,8 @@ class RouteRenderer extends Component{
             transition: this.transition,
             selectedMenu: this.state.selectedMenu,
             setSelectedMenu: this.setSelectedMenu,
+            currentLevel: this.state.currentLevel,
+            setCurrentLevel: this.setCurrentLevel,
           })}
         </TransitionGroup>
       </div>
@@ -82,6 +105,7 @@ export default class App extends Component{
         <Route path='/' component={RouteRenderer}>
           <IndexRoute component={Menu}/>
           <Route path='game' component={Game}/>
+          <Route path='levels' component={Levels}/>
           <Route path='guide' component={Guide}/>
           <Route path='settings' component={Settings}/>
           <Route path='about' component={About}/>
