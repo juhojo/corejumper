@@ -30,7 +30,7 @@ class RouteRenderer extends Component{
   keybinds={};
 
   transition = {
-    time: .3,
+    time: .4,
     scale: 6,
     origin: `${window.innerWidth/2}px ${window.innerHeight/2}px`,
     ease: Sine.easeInOut,
