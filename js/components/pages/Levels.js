@@ -27,7 +27,7 @@ export default class Levels extends SubPage{
   }
 
   componentDidMount(nextProps) {
-    this.onMount();
+    super.componentDidMount();
     const gridRect = ReactDOM.findDOMNode(this.refs.grid).getBoundingClientRect();
     this.setState({
       scrollbarWidth: gridRect.width,

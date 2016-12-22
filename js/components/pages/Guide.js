@@ -4,9 +4,6 @@ import SubPageContent from '../reusable/SubPageContent.js';
 import KeyboardKey from '../reusable/KeyboardKey';
 
 export default class Guide extends SubPage{
-  componentDidMount() {
-    this.onMount();
-  }
   render (){
     return (
       <SubPageContent {...this.props}>

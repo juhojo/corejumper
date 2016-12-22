@@ -5,7 +5,7 @@ import TweenMax from 'gsap';
 export default class SubPage extends Component{
   el = null;
 
-  onMount() {
+  componentDidMount() {
     this.el = ReactDOM.findDOMNode(this);
     this.props.setKeybinds({
       37: this.props.exit,

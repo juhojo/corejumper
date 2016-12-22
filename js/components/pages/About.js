@@ -3,9 +3,6 @@ import SubPage from '../reusable/SubPage.js';
 import SubPageContent from '../reusable/SubPageContent.js';
 
 export default class About extends SubPage{
-  componentDidMount() {
-    this.onMount();
-  }
   render (){
     return (
       <SubPageContent {...this.props}>
