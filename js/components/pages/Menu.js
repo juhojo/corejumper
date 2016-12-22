@@ -47,8 +47,8 @@ export default class Menu extends Component{
     this.el.style.transformOrigin=transition.origin;
     TweenMax.fromTo(
       this.el, transition.time,
-      {transform: `scale(${transition.scale})`, opacity: 0},
-      {transform: 'scale(1)', opacity: 1, onComplete: callback, ease: transition.ease}
+      {transform: `scale(${transition.scale}) rotate(179deg)`, opacity: 0},
+      {transform: 'scale(1) rotate(0deg)', opacity: 1, onComplete: callback, ease: transition.ease}
     );
   }
 
@@ -57,8 +57,8 @@ export default class Menu extends Component{
     this.el.style.transformOrigin = transition.origin;
     TweenMax.fromTo(
       this.el, transition.time,
-      {transform: 'scale(1)', opacity: 1},
-      {transform: `scale(${transition.scale})`, opacity: 0, onComplete: callback, ease: transition.ease}
+      {transform: 'scale(1) rotate(0deg)', opacity: 1},
+      {transform: `scale(${transition.scale}) rotate(179deg)`, opacity: 0, onComplete: callback, ease: transition.ease}
     );
   }
 
