@@ -5,7 +5,15 @@ import KeyboardKey from '../reusable/KeyboardKey';
 import GridItem from '../reusable/GridItem';
 
 export default class Levels extends SubPage{
-  levels = [{number: 0, name: 'Practise'}, {number: 1, name: 'Easy'}, {number: 2, name: 'Medium'}, {number: 3, name: 'Hard'}, {number: 4, name: 'Expert'}];
+  levels = [
+    {number: 0, name: 'Practise'},
+    {number: 1, name: 'Easy'},
+    {number: 2, name: 'Medium'},
+    {number: 3, name: 'Hard'},
+    {number: 4, name: 'Expert'},
+    {number: 5, name: 'Impossible'},
+    {number: 6, name: 'Godlike'},
+  ];
 
   state = {
     selectedLevel: this.props.currentLevel.number,
