@@ -1,6 +1,20 @@
+.thumb-horizontal {
+  background: grey;
+  height: 100%;
+  width: 100%;
+}
+
+.track-horizontal {
+  background: lightgray;
+  height: 20px !important;
+  width: calc(100% - 20px) !important;
+  margin: 0 10px;
+  bottom: 0;
+}
+
 .grid {
   display: block;
-  overflow-x: auto;
+  height: 200px;
   pointer-events: auto;
 
   & .grid-content {

@@ -2,10 +2,10 @@ import React, {Component} from 'react';
 import ReactDOM from 'react-dom';
 import TweenMax from 'gsap';
 
-export default class About extends Component{
+export default class SubPage extends Component{
   el = null;
 
-  componentDidMount(){
+  onMount() {
     this.el = ReactDOM.findDOMNode(this);
     this.props.setKeybinds({
       37: this.props.exit,
