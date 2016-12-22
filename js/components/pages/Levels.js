@@ -3,7 +3,6 @@ import ReactDOM from 'react-dom';
 import SubPage from '../reusable/SubPage.js';
 import SubPageContent from '../reusable/SubPageContent.js';
 import GridItem from '../reusable/GridItem';
-import { Scrollbars } from 'react-custom-scrollbars';
 
 export default class Levels extends SubPage{
   levels = [
@@ -49,24 +48,19 @@ export default class Levels extends SubPage{
       <SubPageContent {...this.props}>
         <div className="flexible-content">
           <div ref="grid" className="grid">
-            <Scrollbars
-              style={{ width: scrollbarWidth, height: scrollbarHeight }}
-              renderThumbVertical={props => <div {...props} className="thumb-vertical"/>}
-              renderTrackVertical={props => <div {...props} className="track-vertical"/>}>
-              <div className="grid-content" style={{ height: `${this.levels.length * 160}px` }}>
-                {this.levels.map((level, i) =>
-                  <GridItem
-                    key={i}
-                    number={level.number}
-                    name={level.name}
-                    currentLevel={this.props.currentLevel}
-                    setCurrentLevel={this.props.currentLevel}
-                    onMouseEnter={this.setSelectedLevel.bind(this, i)}
-                    selected={this.state.selectedLevel === level.number}
-                  />
-                )}
-              </div>
-            </Scrollbars>
+            <div className="grid-content" style={{ height: `${this.levels.length * 160}px` }}>
+              {this.levels.map((level, i) =>
+                <GridItem
+                  key={i}
+                  number={level.number}
+                  name={level.name}
+                  currentLevel={this.props.currentLevel}
+                  setCurrentLevel={this.props.currentLevel}
+                  onMouseEnter={this.setSelectedLevel.bind(this, i)}
+                  selected={this.state.selectedLevel === level.number}
+                />
+              )}
+            </div>
           </div>
           <div>
             <h1>Levels</h1>
