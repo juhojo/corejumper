@@ -3,6 +3,10 @@ import LargeButton from './LargeButton';
 
 export default class LevelDetails extends Component{
 
+  playButtonHandler=e=>{
+    if (this.props.selectedLevel.unlocked) console.log("navigate");
+  }
+
   renderUnlockedAndBeated=selectedLevel=>{
     const { unlocked, finished } = selectedLevel;
     return (
@@ -23,9 +27,10 @@ export default class LevelDetails extends Component{
         <p>Attempts {attempts}</p>
         <p>Best score: {score}</p>
         <LargeButton
-            title="Play"
-            disabled={!unlocked}
-            selected={unlocked}
+          title="Play"
+          onClick={this.playButtonHandler}
+          disabled={!unlocked}
+          selected={unlocked}
         />
       </div>
     );

@@ -5,7 +5,7 @@
   "main": "js/index.js",
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1",
-    "start": "./node_modules/.bin/webpack-dev-server --port 8100"
+    "start": "start cmd /c call ./node_modules/.bin/webpack-dev-server --port 8100 --inline --hot & start cmd /c webpack --watch"
   },
   "repository": {
     "type": "git",

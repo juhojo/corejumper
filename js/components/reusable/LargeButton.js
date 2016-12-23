@@ -11,9 +11,6 @@ export default class LargeButton extends Component{
 
   render (){
     const { title, selected, disabled } = this.props;
-    let classes=selected?'selected':'';
-    classes+=disabled?' disabled':'';
-    classNames('foo', { bar: true }); // => 'foo bar
     return (
       <div
         onClick={this.props.onClick}
