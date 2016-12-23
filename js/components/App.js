@@ -22,6 +22,12 @@ class RouteRenderer extends Component{
       {number: 4, unlocked: false, finished: false, attempts: 0, score: 0},
       {number: 5, unlocked: false, finished: false, attempts: 0, score: 0},
       {number: 6, unlocked: false, finished: false, attempts: 0, score: 0},
+      {number: 7, unlocked: false, finished: false, attempts: 0, score: 0},
+      {number: 8, unlocked: false, finished: false, attempts: 0, score: 0},
+      {number: 9, unlocked: false, finished: false, attempts: 0, score: 0},
+      {number: 10, unlocked: false, finished: false, attempts: 0, score: 0},
+      {number: 11, unlocked: false, finished: false, attempts: 0, score: 0},
+      {number: 12, unlocked: false, finished: false, attempts: 0, score: 0},
     ],
   };
 

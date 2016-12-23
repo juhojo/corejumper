@@ -1,20 +1,31 @@
 .large-button{
+  font-size: 2em;
+  font-family: Raleway;
+  font-weight: 400;
+
   position: relative;
+  display: inline-block;
   width: 8.5em;
-  font-size: 50px;
   line-height: 1.7em;
   padding: 0 1em;
   text-align: center;
-  font-family: Raleway;
-  font-weight: 400;
   text-transform: uppercase;
-  -webkit-user-select: none;
-  -moz-user-select: none;
-  -ms-user-select: none;
+  // -webkit-user-select: none;
+  // -moz-user-select: none;
+  // -ms-user-select: none;
   user-select: none;
+
+  &.block{
+    display: block;
+  }
   
   &:hover{
     cursor: pointer;
+  }
+
+  &.disabled{
+    opacity: .5;
+    cursor: not-allowed;
   }
   
   &.selected::before, &.selected::after{
@@ -28,8 +39,8 @@
     width: .8em;
     height: .8em;
     background: transparent;
-    border: .08em solid black;
-    border-width: 0 0 .08em .08em;
+    border: 0 solid black;
+    border-width: 0 0 $borderWidth $borderWidth;
     transform: translateY(-70.7%) translateX(0) rotate(45deg);
     animation: pulse ease-in-out 1.2s infinite alternate;
   }
@@ -37,7 +48,7 @@
   &.selected::after{
     left: auto;
     right: .30em;
-    border-width: .08em .08em 0 0;
+    border-width: $borderWidth $borderWidth 0 0;
     animation: pulse-reverse ease-in-out 1.2s infinite alternate;
   }
 }

@@ -1,4 +1,5 @@
 #root{
+  font-size: 3vh;
   width: 100vw;
   height: 100vh;
   font-family: Raleway;
@@ -33,7 +34,7 @@
 .content{
   overflow: hidden;
   width: 100%;
-  max-width: 800px;
+  max-width: 1000px;
   position: absolute;
   top: 50%;
   left: 50%;
@@ -54,7 +55,7 @@
   }
 }
 
-.flexible-content {
+//.flexible-content {
   // display: flex;
-  height: 200px;
-}
+  //height: 200px;
+//}

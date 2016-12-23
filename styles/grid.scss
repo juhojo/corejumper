@@ -1,100 +1,139 @@
-.grid {
-  position: absolute;
-  top: 12vh;
-  left: 2vh;
-  width: calc(21vh + 26px);
-  height: 88vh;
-  box-shadow: inset 0 0 0 1px red;
+// $padding: 3;
+// $scrollbar: 4;
+
+// .grid {
+//   $boxSize: 18;
+//   $left: 2vh;
+//   position: absolute;
+//   top: 12vh;
+//   left: $left;
+//   width: #{$boxSize+$padding+$scrollbar}vh;
+//   height: 88vh;
+//   box-shadow: inset 0 0 0 1px red;
   
-  & .grid-item {
-    width: 18vh;
-    height: 18vh;
-    margin-bottom: 2vh;
-    border: 2px solid black;
+//   & .grid-item {
+//     width: #{$boxSize}vh;
+//     height: #{$boxSize}vh;
+//     margin-bottom: 2vh;
+//     border: $borderWidth solid black;
 
-    &:last-of-type{
-      margin-bottom: 0;
-    }
+//     &:last-of-type{
+//       margin-bottom: 0;
+//     }
     
-    &::before,&::after{
-      content: '';
-      position: absolute;
-      background: white;
-      transition: all .3s;
-    }
+//     &::before,&::after{
+//       content: '';
+//       position: absolute;
+//       background: white;
+//       transition: all .3s;
+//     }
 
-    &::before{
-      width: 0;
-      height: 110%;
-      top: -5%;
-      left: 50%;
-      transform: translateX(-50%);
-    }
+//     &::before{
+//       width: 0;
+//       height: 110%;
+//       top: -5%;
+//       left: 50%;
+//       transform: translateX(-50%);
+//     }
 
-    &::after{
-      width: 110%;
-      height: 0;
-      top: 50%;
-      left: -5%;
-      transform: translateY(-50%);
-    }
+//     &::after{
+//       width: 110%;
+//       height: 0;
+//       top: 50%;
+//       left: -5%;
+//       transform: translateY(-50%);
+//     }
 
-    &.selected:not(.locked) {
-      animation: pulsingBorder 1.8s infinite;
+//     &.selected:not(.locked) {
+//       animation: pulsingBorder 1.8s infinite;
     
-      &::before{
-        width: 60%;
-      }
+//       &::before{
+//         width: 60%;
+//       }
 
-      &::after{
-        height: 60%;
-      }
+//       &::after{
+//         height: 60%;
+//       }
       
-      & .grid-item-content{
-        animation: scaleBack 1.8s infinite;
-      }
-    }
+//       & .grid-item-content{
+//         animation: scaleBack 1.8s infinite;
+//       }
+//     }
 
-    &.locked {
-      background-color: lightgrey;
-      color: white;
-      border-color: lightgrey;
-      cursor: not-allowed;
-    }
+//     &.locked.selected{
+//       animation: pulsingBackground 1.8s infinite;
+      
+//       & .grid-item-content{
+//         animation: scaleBack 1.8s infinite;
+//       }
+//     }
 
-    & .grid-item-content {
-      position: absolute;
-      top: 50%;
-      left: 50%;
-      transform: translate(-50%, -50%);
-      z-index: 1;
-      & span{
-        display: inline-block;
-      }
-    }
-  }
-}
+//     &.locked {
+//       background-color: lightgrey;
+//       color: white;
+//       border-color: lightgrey;
+//       cursor: not-allowed;
+//     }
 
-@keyframes scaleBack{
-  0%{
-    transform: translate(-50%, -50%) scale(1);
-  }
-  50%{
-    transform: translate(-50%, -50%) scale(0.88888);
-  }
-  100%{
-    transform: translate(-50%, -50%) scale(1);
-  }
-}
+//     & .grid-item-content {
+//       position: absolute;
+//       top: 50%;
+//       left: 50%;
+//       transform: translate(-50%, -50%);
+//       z-index: 1;
+//       & span{
+//         display: inline-block;
+//       }
+//     }
+//   }
+// }
 
-@keyframes pulsingBorder {
-  0%{
-    transform: scale(1);
-  }
-  50%{
-    transform: scale(1.125);
-  }
-  100%{
-    transform: scale(1);
-  }
-}
+// @media (max-width: 400px){
+//   .grid {
+//     $boxSize: 10;
+//     $left: 0;
+//     left: $left;
+//     width: #{$boxSize+$padding+$scrollbar}vh;
+    
+//     & .grid-item {
+//       width: #{$boxSize}vh;
+//       height: #{$boxSize}vh;
+//     }
+//   }
+// }
+
+// @keyframes scaleBack{
+//   0%{
+//     transform: translate(-50%, -50%) scale(1);
+//   }
+//   50%{
+//     transform: translate(-50%, -50%) scale(0.88888);
+//   }
+//   100%{
+//     transform: translate(-50%, -50%) scale(1);
+//   }
+// }
+
+// @keyframes pulsingBorder {
+//   0%{
+//     transform: scale(1);
+//   }
+//   50%{
+//     transform: scale(1.125);
+//   }
+//   100%{
+//     transform: scale(1);
+//   }
+// }
+
+// @keyframes pulsingBackground {
+//   0%{
+//     transform: scale(1);
+//   }
+//   50%{
+//     transform: scale(1.125);
+//   }
+//   100%{
+//     transform: scale(1);
+//   }
+// }

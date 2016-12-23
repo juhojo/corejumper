@@ -120,6 +120,7 @@ export default class Menu extends Component{
               selected={this.props.selectedMenu==i}
               onMouseEnter={this.mouseoverHandler.bind(this, i)}
               onClick={this.clickHandler.bind(this, i)}
+              block
             />
           )}
         </div>

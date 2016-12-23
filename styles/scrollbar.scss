@@ -17,17 +17,17 @@
 
     & .scrollbar-container-inner{
       width: 100%;
-      padding-right: 26px;
+      padding-right: 4vh;
     }
   }
 
   & .scrollbar-track{
-    width: 16px;
-    height: calc(100% - 10px);
+    width: 2vh;
+    height: calc(100% - 2vh);
     position: absolute;
-    right: 5px;
-    top: 5px;
-    cursor: row-resize;
+    right: 1vh;
+    top: 1vh;
+    cursor: pointer;
     
     &::before{
       content: '';
@@ -35,7 +35,7 @@
       top: 0;
       left: 50%;
       transform: translateX(-50%);
-      width: 2px;
+      width: $borderWidth;
       height: 100%;
       background-color: black;
     }
@@ -45,7 +45,7 @@
       left: 0;
       top: 0;
       width: 100%;
-      border: 2px solid black;
+      border: $borderWidth solid black;
       background-color: white;
     }
   }

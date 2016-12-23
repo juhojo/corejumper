@@ -10,12 +10,12 @@ export default class LargeButton extends Component{
   };
 
   render (){
-    const { title, selected, disabled } = this.props;
+    const { title, selected, disabled, block } = this.props;
     return (
       <div
         onClick={this.props.onClick}
         onMouseEnter={this.props.onMouseEnter}
-        className={classNames('large-button', { selected, disabled })}>
+        className={classNames('large-button', { selected, disabled, block })}>
         {title}
       </div>
     );
