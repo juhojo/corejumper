@@ -14,17 +14,15 @@ class RouteRenderer extends Component{
   state={
     selectedMenu:0,
     userProgress: 0, // User's progress in game. Which level they have reached.
-    currentLevel: {
-      number: 3,
-      name: 'Practise',
-      length: 10 * Math.PI, // Length of the level: How many rotations. Example: 5 laps.
-      bodies: {
-        player: {},
-        boxes: [{}],
-        circles: [{}],
-        core: [{}, {}], // Amout of the level circles. Example: outer + inner.
-      }
-    },
+    currentProgress: {number: 3, unlocked: true, finished: false, attempts: 8, score: 0},
+    progress: [ // Move to Local Storage?
+      {number: 1, unlocked: true, finished: true, attempts: 10, score: 5},
+      {number: 2, unlocked: true, finished: true, attempts: 2, score: 8},
+      {number: 3, unlocked: true, finished: false, attempts: 8, score: 0},
+      {number: 4, unlocked: false, finished: false, attempts: 0, score: 0},
+      {number: 5, unlocked: false, finished: false, attempts: 0, score: 0},
+      {number: 6, unlocked: false, finished: false, attempts: 0, score: 0},
+    ],
   };
 
   keybinds={};
@@ -87,8 +85,9 @@ class RouteRenderer extends Component{
             transition: this.transition,
             selectedMenu: this.state.selectedMenu,
             setSelectedMenu: this.setSelectedMenu,
-            currentLevel: this.state.currentLevel,
+            currentProgress: this.state.currentProgress,
             setCurrentLevel: this.setCurrentLevel,
+            progress: this.state.progress,
           })}
         </TransitionGroup>
       </div>

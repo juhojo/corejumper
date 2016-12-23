@@ -84,16 +84,18 @@ export default class Menu extends Component{
   }
 
   moveUp=()=>{
-    this.props.selectedMenu==0
-      ? this.props.setSelectedMenu(this.state.options.length-1)
-      : this.props.setSelectedMenu(this.props.selectedMenu-1)
+    const { selectedMenu, setSelectedMenu } = this.props;
+    selectedMenu==0
+      ? setSelectedMenu(this.state.options.length-1)
+      : setSelectedMenu(selectedMenu-1)
     ;
   }
 
   moveDown=()=>{
-    this.props.selectedMenu==this.state.options.length-1
-      ? this.props.setSelectedMenu(0)
-      : this.props.setSelectedMenu(this.props.selectedMenu+1)
+    const { selectedMenu, setSelectedMenu } = this.props;
+    selectedMenu==this.state.options.length-1
+      ? setSelectedMenu(0)
+      : setSelectedMenu(selectedMenu+1)
     ;
   }
 

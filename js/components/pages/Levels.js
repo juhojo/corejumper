@@ -3,34 +3,32 @@ import ReactDOM from 'react-dom';
 import SubPage from '../reusable/SubPage.js';
 import SubPageContent from '../reusable/SubPageContent.js';
 import GridItem from '../reusable/GridItem';
+import LevelDetails from '../reusable/LevelDetails';
 import Scrollbar from '../reusable/Scrollbar';
-import LargeButton from '../reusable/LargeButton';
 
 export default class Levels extends SubPage{
-  levels = [
-    {number: 0, name: 'Practise'},
-    {number: 1, name: 'Easy'},
-    {number: 2, name: 'Medium'},
-    {number: 3, name: 'Hard'},
-    {number: 4, name: 'Expert'},
-    {number: 5, name: 'Impossible'},
-    {number: 6, name: 'Godlike'},
-  ];
 
   state = {
-    selectedLevel: this.props.currentLevel.number,
+    selectedLevel: this.props.currentProgress,
     scrollbarWidth: 0,
     scrollbarHeight: 0,
   }
 
   setSelectedLevel(i,e){
-    this.setState({ selectedLevel: i });
+    this.setState({ selectedLevel: this.props.progress[i] });
   }
 
   componentDidMount(nextProps) {
     super.componentDidMount();
     window.addEventListener('resize', this.handleResize);
     this.setGridRect(ReactDOM.findDOMNode(this.refs.grid).getBoundingClientRect());
+    this.props.setKeybinds({
+      37: this.props.exit,
+      8: this.props.exit,
+      38: this.moveUp,
+      40: this.moveDown,
+      // 39: this.startGame, // TODO
+    });
   }
 
   handleResize=e=>{
@@ -44,22 +42,40 @@ export default class Levels extends SubPage{
     });
   }
 
+  moveUp=()=>{
+    const { progress } = this.props;
+    const { selectedLevel } = this.state;
+    (selectedLevel.number-1)==0
+      ? this.setSelectedLevel(progress.length-1)
+      : this.setSelectedLevel((selectedLevel.number-1)-1)
+    ;
+  }
+
+  moveDown=()=>{
+    const { progress } = this.props;
+    const { selectedLevel } = this.state;
+    (selectedLevel.number-1)==progress.length-1
+      ? this.setSelectedLevel(0)
+      : this.setSelectedLevel((selectedLevel.number-1)+1)
+    ;
+  }
+
   render (){
-    const { scrollbarWidth, scrollbarHeight } = this.state;
+    const { progress, currentProgress, setKeybinds } = this.props;
+    const { scrollbarWidth, scrollbarHeight, selectedLevel } = this.state;
     return (
       <SubPageContent {...this.props} style={{height: '100%'}} id="levels">
         <div ref="grid" className="grid">
           <Scrollbar>
             <div style={{padding: 10}}>
-              {this.levels.map((level, i) =>
+              {progress.map((level, i) =>
                 <GridItem
                   key={i}
                   number={level.number}
-                  name={level.name}
-                  currentLevel={this.props.currentLevel}
-                  setCurrentLevel={this.props.currentLevel}
+                  currentLevel={currentProgress}
+                  setCurrentLevel={currentProgress}
                   onMouseEnter={this.setSelectedLevel.bind(this, i)}
-                  selected={this.state.selectedLevel === level.number}
+                  selected={selectedLevel.number === level.number}
                 />
               )}
             </div>
@@ -69,16 +85,7 @@ export default class Levels extends SubPage{
           <h1>Levels</h1>
         </div>
         <div className="level-details">
-          <div className="container">
-            <h2>Level 3</h2>
-            <p>You've unlocked this level, but are yet to beat it.</p>
-            <p>Attempts: 9</p>
-            <p>Best score: 13</p>
-            <LargeButton
-                title="Play"
-                selected={true}
-            />
-          </div>
+          <LevelDetails selectedLevel={selectedLevel} />
         </div>
       </SubPageContent>
     );
