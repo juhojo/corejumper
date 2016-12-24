@@ -67,7 +67,6 @@ export default class Levels extends SubPage{
       <SubPageContent {...this.props} style={{height: '100%'}} id="levels">
         <div ref="grid" className="grid">
           <Scrollbar>
-            <div style={{padding: 10}}>
               {progress.map((level, i) =>
                 <GridItem
                   key={i}
@@ -78,11 +77,7 @@ export default class Levels extends SubPage{
                   selected={selectedLevel.number === level.number}
                 />
               )}
-            </div>
           </Scrollbar>
-        </div>
-        <div className="title">
-          <h1>Levels</h1>
         </div>
         <div className="level-details">
           <LevelDetails selectedLevel={selectedLevel} />
