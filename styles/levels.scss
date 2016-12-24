@@ -12,17 +12,23 @@ $gridWidth: #{$boxSize+$padding+$scrollbar}vh;
     left: $left;
     width: $gridWidth;
     height: 88vh;
+
+    & .scrollbar-container-inner{
+      &::before, &::after{
+        content: '';
+        display: inline-block;
+        height: 34.5vh; // grid-height / 2 - box-height / 2 - box-margin-top
+      }
+    }
     
     & .grid-item {
+      display:inline-block; //to avoid vertical margin collapsing
+      box-sizing: content-box; //to increase the box size as padding is animated
       width: #{$boxSize}vh;
       height: #{$boxSize}vh;
-      margin-bottom: 2vh;
-      margin-left: 1.5vh;
+      margin: .5vh 1.5vh;
+      padding: 0;
       border: $borderWidth solid black;
-
-      &:last-of-type{
-        margin-bottom: 0;
-      }
       
       &::before, &::after{
         content: '';
@@ -33,23 +39,22 @@ $gridWidth: #{$boxSize+$padding+$scrollbar}vh;
 
       &::before{
         width: 0;
-        height: 110%;
-        top: -5%;
+        height: calc(100% + 2 * #{$borderWidth});
+        top: -#{$borderWidth};
         left: 50%;
         transform: translateX(-50%);
       }
 
       &::after{
-        width: 110%;
+        width: calc(100% + 2 * #{$borderWidth});
         height: 0;
         top: 50%;
-        left: -5%;
+        left: -#{$borderWidth};
         transform: translateY(-50%);
       }
 
       &.selected:not(.locked) {
-        transform: scale(1);
-        animation: pulsingBorder 1.8s infinite;
+        animation: pulsing 1.8s infinite;
       
         &::before{
           width: 60%;
@@ -61,17 +66,14 @@ $gridWidth: #{$boxSize+$padding+$scrollbar}vh;
         
         & .grid-item-content{
           transform: translate(-50%, -50%) scale(1);
-          animation: scaleBack 1.8s infinite;
         }
       }
 
       &.locked.selected{
-        transform: scale(1);
-        animation: pulsingBackground 1.8s infinite;
+        animation: pulsing 1.8s infinite;
         
         & .grid-item-content{
-          transform: translate(-50%, -50%) scale(1);
-          animation: scaleBack 1.8s infinite;
+          transform: translate(-50%, -50%);
         }
       }
 
@@ -146,55 +148,17 @@ $gridWidth: #{$boxSize+$padding+$scrollbar}vh;
   }
 }
 
-
-
-
-
-
-
-// animations
-
-@keyframes scaleBack{
+@keyframes pulsing{
   0%{
-    transform: translate(-50%, -50%) scale(1);
-  }
-  0.01%{
-    transform: translate(-50%, -50%) scale(1);
+    margin: .5vh 1.5vh;
+    padding: 0;
   }
   50%{
-    transform: translate(-50%, -50%) scale(0.88888);
+    margin: -.5vh 0.5vh;
+    padding: 1vh;
   }
   100%{
-    transform: translate(-50%, -50%) scale(1);
-  }
-}
-
-@keyframes pulsingBorder {
-  0%{
-    transform: scale(1);
-  }
-  0.01%{
-    transform: scale(1);
-  }
-  50%{
-    transform: scale(1.125);
-  }
-  100%{
-    transform: scale(1);
-  }
-}
-
-@keyframes pulsingBackground {
-  0%{
-    transform: scale(1);
-  }
-  0.01%{
-    transform: scale(1);
-  }
-  50%{
-    transform: scale(1.125);
-  }
-  100%{
-    transform: scale(1);
+    margin: .5vh 1.5vh;
+    padding: 0;
   }
 }
