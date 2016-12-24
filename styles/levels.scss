@@ -48,6 +48,7 @@ $gridWidth: #{$boxSize+$padding+$scrollbar}vh;
       }
 
       &.selected:not(.locked) {
+        transform: scale(1);
         animation: pulsingBorder 1.8s infinite;
       
         &::before{
@@ -59,14 +60,17 @@ $gridWidth: #{$boxSize+$padding+$scrollbar}vh;
         }
         
         & .grid-item-content{
+          transform: translate(-50%, -50%) scale(1);
           animation: scaleBack 1.8s infinite;
         }
       }
 
       &.locked.selected{
+        transform: scale(1);
         animation: pulsingBackground 1.8s infinite;
         
         & .grid-item-content{
+          transform: translate(-50%, -50%) scale(1);
           animation: scaleBack 1.8s infinite;
         }
       }
@@ -154,6 +158,9 @@ $gridWidth: #{$boxSize+$padding+$scrollbar}vh;
   0%{
     transform: translate(-50%, -50%) scale(1);
   }
+  0.01%{
+    transform: translate(-50%, -50%) scale(1);
+  }
   50%{
     transform: translate(-50%, -50%) scale(0.88888);
   }
@@ -166,6 +173,9 @@ $gridWidth: #{$boxSize+$padding+$scrollbar}vh;
   0%{
     transform: scale(1);
   }
+  0.01%{
+    transform: scale(1);
+  }
   50%{
     transform: scale(1.125);
   }
@@ -176,6 +186,9 @@ $gridWidth: #{$boxSize+$padding+$scrollbar}vh;
 
 @keyframes pulsingBackground {
   0%{
+    transform: scale(1);
+  }
+  0.01%{
     transform: scale(1);
   }
   50%{

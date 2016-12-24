@@ -10,9 +10,6 @@
   padding: 0 1em;
   text-align: center;
   text-transform: uppercase;
-  // -webkit-user-select: none;
-  // -moz-user-select: none;
-  // -ms-user-select: none;
   user-select: none;
 
   &.block{
@@ -41,7 +38,7 @@
     background: transparent;
     border: 0 solid black;
     border-width: 0 0 $borderWidth $borderWidth;
-    transform: translateY(-70.7%) translateX(0) rotate(45deg);
+    transform: translate(0, -70.7%) rotate(45deg);
     animation: pulse ease-in-out 1.2s infinite alternate;
   }
 
@@ -49,6 +46,7 @@
     left: auto;
     right: .30em;
     border-width: $borderWidth $borderWidth 0 0;
+    transform: translate(50%, -70.7%) rotate(45deg);
     animation: pulse-reverse ease-in-out 1.2s infinite alternate;
   }
 }
@@ -57,10 +55,13 @@
 @mixin pulse-animation($name, $start, $end){
   @keyframes #{$name} {
     0% {
-      transform: translateY(-70.7%) translateX($start) rotate(45deg);
+      transform: translate(#{$start}, -70.7%) rotate(45deg);
+    }
+    0.01% {
+      transform: translate(#{$start}, -70.7%) rotate(45deg);
     }
     100% {
-      transform: translateY(-70.7%) translateX($end) rotate(45deg);
+      transform: translate(#{$end}, -70.7%) rotate(45deg);
     }
   }
 }
