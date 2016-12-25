@@ -10,7 +10,8 @@ export default class Scrollbar extends Component{
   dragging=false;
   scrollStart=0;
   dragStart=0;
-  outerRect={};
+  outerHeight=0;
+  outerWidth=0;
   innerHeight=0;
   trackHeight=0;
   handleHeight=0;
@@ -46,13 +47,18 @@ export default class Scrollbar extends Component{
   }
 
   setDimensions=()=>{
-    this.outerRect=this.outer.getBoundingClientRect();
-    this.innerHeight=this.inner.getBoundingClientRect().height;
-    this.trackHeight=this.track.getBoundingClientRect().height;
-    this.handleHeight=this.trackHeight*(this.outerRect.height/this.innerHeight);
+    this.outerHeight=this.outer.offsetHeight;
+    this.outerWidth=this.outer.offsetWidth;
+    this.inner.style.width=this.outerWidth+"px";
 
-    this.inner.style.width=this.outerRect.width+"px";
+    this.innerHeight=this.middle.scrollHeight;
+    this.trackHeight=this.track.offsetHeight;
+    const percentageVisible=(this.outerHeight/this.innerHeight);
+    this.handleHeight=percentageVisible > 1
+      ? this.trackHeight
+      : this.trackHeight*percentageVisible;
     this.handle.style.height=this.handleHeight+"px";
+
     this.updateHandle();
   }
 
