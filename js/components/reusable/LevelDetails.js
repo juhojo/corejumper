@@ -3,10 +3,6 @@ import LargeButton from './LargeButton';
 
 export default class LevelDetails extends Component{
 
-  playButtonHandler=e=>{
-    if (this.props.selectedLevel.unlocked) console.log("navigate");
-  }
-
   renderUnlockedAndBeated=selectedLevel=>{
     const { unlocked, finished } = selectedLevel;
     return (
@@ -19,7 +15,7 @@ export default class LevelDetails extends Component{
   }
 
   render (){
-    const { selectedLevel, selectedLevel: { number, attempts, score, unlocked } } = this.props;
+    const { selectedLevel, selectedLevel: { number, attempts, score, unlocked }, startGame } = this.props;
     return (
       <div className="container">
         <h2>Level {number}</h2>
@@ -28,11 +24,12 @@ export default class LevelDetails extends Component{
         <p>Best score: {score}</p>
         <LargeButton
           title="Play"
-          onClick={this.playButtonHandler}
+          onClick={startGame}
           disabled={!unlocked}
           selected={unlocked}
         />
       </div>
     );
   }
+  
 }

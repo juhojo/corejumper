@@ -11,7 +11,7 @@ export default class Game extends Component{
   render (){
     return (
       <div id="game" className="page">
-        GAME
+        GAME: level {this.props.progress[this.props.selectedLevel].number}
       </div>
     );
   }

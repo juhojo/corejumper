@@ -13,9 +13,9 @@ import About from './pages/About.js';
 class RouteRenderer extends Component{
   state={
     selectedMenu:0,
-    userProgress: 0, // User's progress in game. Which level they have reached.
-    currentProgress: {number: 3, unlocked: true, finished: false, attempts: 8, score: 0},
-    progress: [ // Move to Local Storage?
+    userProgress: 2, // User's progress in game. Which level they have reached.
+    selectedLevel: 2, // The level user has selected to play
+    progress: [
       {number: 1, unlocked: true, finished: true, attempts: 10, score: 5},
       {number: 2, unlocked: true, finished: true, attempts: 2, score: 8},
       {number: 3, unlocked: true, finished: false, attempts: 8, score: 0},
@@ -48,17 +48,7 @@ class RouteRenderer extends Component{
     window.addEventListener('keydown', this.keydownHandler);
   }
 
-  navigate(url){
-    hashHistory.push(url);
-  }
-
-  exit(){
-    hashHistory.push('/');
-  }
-
-  setKeybinds=obj=>{
-    this.keybinds=obj;
-  }
+  /* Event handlers*/
 
   keydownHandler=e=>{
     if(this.keybinds[e.which]){
@@ -67,33 +57,47 @@ class RouteRenderer extends Component{
     }
   }
 
-  setSelectedMenu=selectedMenu=>{
-    this.setState({selectedMenu});
+  /* Navigation handlers*/
+
+  navigate=url=>{
+    hashHistory.push(url);
   }
 
-  setCurrentLevel=number=>{
-    // TODO Fetch the level data by level number.
-    console.log(number);
-    const { userProgress } = this.state;
-    if (number <= userProgress) console.log("Change level."); // Go to level
-    else console.log("Show some message."); // Prevent.
+  exit=()=>{
+    hashHistory.push('/');
+  }
+
+  /* Setters */
+
+  setKeybinds=obj=>{
+    this.keybinds=obj;
+  }
+
+  setSelectedLevel=(selectedLevel, callback)=>{
+    this.setState({ selectedLevel }, callback);
+  }
+
+  setSelectedMenu=selectedMenu=>{
+    this.setState({ selectedMenu });
   }
 
   render(){
+    const { selectedMenu, selectedLevel, progress, userProgress } = this.state;
     return (
       <div id="route-renderer">
         <TransitionGroup component="div" className="full-height">
           {React.cloneElement(this.props.children, {
             key: this.props.location.pathname,
-            navigate: this.navigate.bind(this),
-            exit: this.exit.bind(this),
-            setKeybinds: this.setKeybinds.bind(this),
+            navigate: this.navigate,
+            exit: this.exit,
+            setKeybinds: this.setKeybinds,
             transition: this.transition,
-            selectedMenu: this.state.selectedMenu,
             setSelectedMenu: this.setSelectedMenu,
-            currentProgress: this.state.currentProgress,
-            setCurrentLevel: this.setCurrentLevel,
-            progress: this.state.progress,
+            setSelectedLevel: this.setSelectedLevel,
+            selectedMenu,
+            selectedLevel,
+            progress,
+            userProgress,
           })}
         </TransitionGroup>
       </div>
