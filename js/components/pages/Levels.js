@@ -30,6 +30,7 @@ export default class Levels extends SubPage{
 
   startGame=()=>{
     if(this.props.progress[this.state.selectedLevel].unlocked){
+      this.setRotation(true);
       this.props.setSelectedLevel(
         this.state.selectedLevel,
         ()=>{this.props.navigate('game')}

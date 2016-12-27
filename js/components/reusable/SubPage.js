@@ -4,6 +4,7 @@ import TweenMax from 'gsap';
 
 export default class SubPage extends Component{
   el = null;
+  clockwise = false;
 
   componentDidMount() {
     this.el = ReactDOM.findDOMNode(this);
@@ -26,11 +27,23 @@ export default class SubPage extends Component{
   componentWillLeave(callback) {
     const {transition} = this.props;
     this.el.style.transformOrigin = transition.origin;
-    TweenMax.fromTo(
-      this.el, transition.time,
-      {transform: 'scale(1) rotate(0deg)', opacity: 1},
-      {transform: 'scale(0.1) rotate(-179deg)', opacity: 0, onComplete: callback, ease: transition.ease}
-    );
+    if (this.clockwise) {
+      TweenMax.fromTo(
+        this.el, transition.time,
+        {transform: 'scale(1) rotate(0deg)', opacity: 1},
+        {transform: `scale(${transition.scale}) rotate(179deg)`, opacity: 0, onComplete: callback, ease: transition.ease}
+      );
+    } else {
+      TweenMax.fromTo(
+        this.el, transition.time,
+        {transform: 'scale(1) rotate(0deg)', opacity: 1},
+        {transform: 'scale(0.1) rotate(-179deg)', opacity: 0, onComplete: callback, ease: transition.ease}
+      );
+    }
+  }
+
+  setRotation=clockwise=>{
+    this.clockwise = clockwise;
   }
 
   render (){
