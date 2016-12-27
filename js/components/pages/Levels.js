@@ -7,6 +7,7 @@ import LevelDetails from '../reusable/LevelDetails';
 import Scrollbar from '../reusable/Scrollbar';
 import { TweenLite, Sine } from 'gsap';
 import 'ScrollToPlugin'; // Using aliases in webpack.config.js allowes using GASP-plugins
+import TransitionGroup from 'react-addons-transition-group';
 
 export default class Levels extends SubPage{
   grid=null;
@@ -14,6 +15,7 @@ export default class Levels extends SubPage{
   state = {
     selectedLevel: this.props.selectedLevel,
   }
+  move={up:true};
 
   componentDidMount(nextProps) {
     super.componentDidMount();
@@ -51,6 +53,7 @@ export default class Levels extends SubPage{
   }
 
   moveUp=()=>{
+    this.move.up=true;
     const { progress } = this.props;
     const { selectedLevel } = this.state;
     (selectedLevel)==0
@@ -61,6 +64,7 @@ export default class Levels extends SubPage{
   }
 
   moveDown=()=>{
+    this.move.up=false;
     const { progress } = this.props;
     const { selectedLevel } = this.state;
     (selectedLevel)==progress.length-1
@@ -110,11 +114,15 @@ export default class Levels extends SubPage{
           </Scrollbar>
         </div>
         <div className="level-details">
-          <LevelDetails
-            selectedLevel={progress[selectedLevel]}
-            progress={progress}
-            startGame={this.startGame}
-          />
+          <TransitionGroup component="div" className="full-height">
+            <LevelDetails
+              selectedLevel={progress[selectedLevel]}
+              progress={progress}
+              startGame={this.startGame}
+              move={this.move}
+              key={progress[selectedLevel].number}
+            />
+          </TransitionGroup>
         </div>
       </SubPageContent>
     );

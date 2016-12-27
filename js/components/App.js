@@ -1,6 +1,5 @@
 import React, {Component} from 'react';
-import ReactDOM from 'react-dom';
-import { Router, Route, IndexRoute, Link, hashHistory } from 'react-router';
+import { Router, Route, IndexRoute, hashHistory } from 'react-router';
 import TransitionGroup from 'react-addons-transition-group';
 import {Sine} from 'gsap';
 import Menu from './pages/Menu.js';

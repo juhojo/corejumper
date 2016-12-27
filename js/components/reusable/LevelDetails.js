@@ -1,7 +1,11 @@
 import React, {Component} from 'react';
+import ReactDOM from 'react-dom';
 import LargeButton from './LargeButton';
+import TweenMax, {Sine} from 'gsap';
 
 export default class LevelDetails extends Component{
+  animationValues=['20%','80%'];
+
 
   renderUnlockedAndBeated=selectedLevel=>{
     const { unlocked, finished } = selectedLevel;
@@ -11,6 +15,22 @@ export default class LevelDetails extends Component{
         {(unlocked && !finished) && `You've unlocked this level, but are yet to beat it.`}
         {!unlocked && `You are yet to beat the previous levels.`}
       </p>
+    );
+  }
+  
+  componentWillEnter(callback){
+    TweenMax.fromTo(
+      ReactDOM.findDOMNode(this), .3,
+      {top: this.props.move.up?this.animationValues[0]:this.animationValues[1], opacity: 0},
+      {top: '50%', opacity: 1, onComplete: callback, ease: Sine.easeOut}
+    );
+  }
+
+  componentWillLeave(callback){
+    TweenMax.fromTo(
+      ReactDOM.findDOMNode(this), .3,
+      {top: '50%', opacity: 1},
+      {top: this.props.move.up?this.animationValues[1]:this.animationValues[0], opacity: 0, onComplete: callback, ease: Sine.easeIn}
     );
   }
 
