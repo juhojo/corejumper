@@ -10,7 +10,7 @@ import 'ScrollToPlugin'; // Using aliases in webpack.config.js allowes using GAS
 
 export default class Levels extends SubPage{
   grid=null;
-
+  tween=null;
   state = {
     selectedLevel: this.props.selectedLevel,
   }
@@ -71,7 +71,8 @@ export default class Levels extends SubPage{
   }
 
   animateScroll(elem, scrollTo) {
-    TweenLite.to(elem, .3, {scrollTo: elem.scrollTop+scrollTo, ease: Sine.easeInOut});
+    this.tween && this.tween.kill(); // TODO Resolve.
+    this.tween = TweenLite.to(elem, .3, {scrollTo: elem.scrollTop+scrollTo, ease: Sine.easeInOut});
   }
 
   centralizeCurrent=()=>{
