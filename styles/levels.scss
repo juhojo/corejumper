@@ -29,6 +29,8 @@ $gridWidth: #{$boxSize+$padding+$scrollbar}vh;
       margin: .5vh 1.5vh;
       padding: 0;
       border: $borderWidth solid black;
+      font-family: arial;
+      font-size: 1.6em;  
       
       &::before, &::after{
         content: '';
@@ -78,10 +80,15 @@ $gridWidth: #{$boxSize+$padding+$scrollbar}vh;
       }
 
       &.locked {
-        background-color: lightgrey;
-        color: white;
-        border-color: lightgrey;
         cursor: not-allowed;
+        background: repeating-linear-gradient(
+          135deg,
+          black,
+          black $borderWidth,
+          white $borderWidth,
+          white 2.5*$borderWidth
+        );
+        background-origin: border-box;
       }
 
       & .grid-item-content {
