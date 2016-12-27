@@ -75,7 +75,7 @@ export default class Levels extends SubPage{
   }
 
   animateScroll(elem, scrollTo) {
-    this.tween && this.tween.kill(); // TODO Resolve.
+    this.tween && TweenLite.killTweensOf(this.tween);
     this.tween = TweenLite.to(elem, .3, {scrollTo: elem.scrollTop+scrollTo, ease: Sine.easeInOut});
   }
 
