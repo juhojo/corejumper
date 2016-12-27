@@ -16,5 +16,5 @@ export default class GridItem extends Component{
       </div>
     );
   }
-  
+
 }

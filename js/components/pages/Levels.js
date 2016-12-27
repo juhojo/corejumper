@@ -5,6 +5,8 @@ import SubPageContent from '../reusable/SubPageContent.js';
 import GridItem from '../reusable/GridItem';
 import LevelDetails from '../reusable/LevelDetails';
 import Scrollbar from '../reusable/Scrollbar';
+import { TweenLite, Sine } from 'gsap';
+import 'ScrollToPlugin'; // Using aliases in webpack.config.js allowes using GASP-plugins
 
 export default class Levels extends SubPage{
   grid=null;
@@ -29,11 +31,11 @@ export default class Levels extends SubPage{
   startGame=()=>{
     if(this.props.progress[this.state.selectedLevel].unlocked){
       this.props.setSelectedLevel(
-        this.state.selectedLevel, 
+        this.state.selectedLevel,
         ()=>{this.props.navigate('game')}
       );
     }
-    
+
   }
 
   setSelectedLevel(selectedLevel, e){
@@ -67,11 +69,15 @@ export default class Levels extends SubPage{
     this.centralizeCurrent();
   }
 
+  animateScroll(elem, scrollTo) {
+    TweenLite.to(elem, .3, {scrollTo: elem.scrollTop+scrollTo, ease: Sine.easeInOut});
+  }
+
   centralizeCurrent=()=>{
     const currentGridItem=this.grid.getElementsByClassName('grid-item')[this.state.selectedLevel];
     const offsetTopShouldBe=this.grid.offsetHeight/2-currentGridItem.offsetHeight/2;
     const offsetTopIs=currentGridItem.getBoundingClientRect().top-this.grid.getBoundingClientRect().top;
-    currentGridItem.parentElement.parentElement.scrollTop+=offsetTopIs-offsetTopShouldBe;
+    this.animateScroll(currentGridItem.parentElement.parentElement, offsetTopIs-offsetTopShouldBe);
   }
 
   slideGridItemIntoView=which=>{
@@ -81,7 +87,7 @@ export default class Levels extends SubPage{
     let offsetIncement=0;
     if(offsetTopIs<0) offsetIncement=offsetTopIs;
     else if(offsetTopIs>maxOffset) offsetIncement=offsetTopIs-maxOffset;
-    currentGridItem.parentElement.parentElement.scrollTop+=offsetIncement*1.2;
+    this.animateScroll(currentGridItem.parentElement.parentElement, offsetIncement*1.2);
   }
 
   render (){
@@ -91,19 +97,19 @@ export default class Levels extends SubPage{
       <SubPageContent {...this.props} style={{height: '100%'}} id="levels">
         <div ref="grid" className="grid">
           <Scrollbar>
-              {progress.map((level, i) =>
-                <GridItem
-                  key={i}
-                  level={level}
-                  selected={selectedLevel === i}
-                  onMouseEnter={this.gridItemMouseEnterHandler.bind(this, i)}
-                />
-              )}
+            {progress.map((level, i) =>
+              <GridItem
+                key={i}
+                level={level}
+                selected={selectedLevel === i}
+                onMouseEnter={this.gridItemMouseEnterHandler.bind(this, i)}
+              />
+            )}
           </Scrollbar>
         </div>
         <div className="level-details">
-          <LevelDetails 
-            selectedLevel={progress[selectedLevel]} 
+          <LevelDetails
+            selectedLevel={progress[selectedLevel]}
             progress={progress}
             startGame={this.startGame}
           />

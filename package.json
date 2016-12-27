@@ -36,6 +36,7 @@
     "gsap": "^1.19.0",
     "lodash": "^4.17.2",
     "node-sass": "^4.0.0",
+    "path": "^0.12.7",
     "react": "^15.4.1",
     "react-addons-transition-group": "^15.4.1",
     "react-custom-scrollbars": "^4.0.0",
