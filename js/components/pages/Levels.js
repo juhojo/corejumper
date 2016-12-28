@@ -8,12 +8,11 @@ import Scrollbar from '../reusable/Scrollbar';
 import { TweenLite, Sine } from 'gsap';
 import 'ScrollToPlugin'; // Using aliases in webpack.config.js allowes using GASP-plugins
 import TransitionGroup from 'react-addons-transition-group';
+import _ from 'lodash';
 
 export default class Levels extends SubPage{
   grid=null;
   tween=null;
-  clickDate=null;
-  timeout=null;
   state = {
     selectedLevel: this.props.selectedLevel,
   }
@@ -25,8 +24,8 @@ export default class Levels extends SubPage{
     this.props.setKeybinds({
       37: this.props.exit,
       8: this.props.exit,
-      38: this.moveUp,
-      40: this.moveDown,
+      38: _.throttle(this.moveUp, 250),
+      40: _.throttle(this.moveDown, 250),
       39: this.startGame,
     });
     this.centralizeCurrent();
@@ -55,43 +54,25 @@ export default class Levels extends SubPage{
   }
 
   moveUp=()=>{
-    if (this.allowMove(true)) {
-      this.move.up=true;
-      const { progress } = this.props;
-      const { selectedLevel } = this.state;
-      (selectedLevel)==0
-        ? this.setSelectedLevel(progress.length-1)
-        : this.setSelectedLevel(selectedLevel-1)
-      ;
-      this.centralizeCurrent();
-    }
+    this.move.up=true;
+    const { progress } = this.props;
+    const { selectedLevel } = this.state;
+    (selectedLevel)==0
+      ? this.setSelectedLevel(progress.length-1)
+      : this.setSelectedLevel(selectedLevel-1)
+    ;
+    this.centralizeCurrent();
   }
 
   moveDown=()=>{
-    if (this.allowMove(false)){
-      this.move.up=false;
-      const { progress } = this.props;
-      const { selectedLevel } = this.state;
-      (selectedLevel)==progress.length-1
-        ? this.setSelectedLevel(0)
-        : this.setSelectedLevel(selectedLevel+1)
-      ;
-      this.centralizeCurrent();
-    }
-  }
-
-  allowMove(direction) {
-    let bool = true;
-    this.timeout && clearTimeout(this.timeout);
-    if(this.clickDate && new Date() - this.clickDate < 100 && direction == this.move.up) {
-      bool = false;
-    }
-    if(bool) {
-      this.clickDate = new Date();
-    } else {
-      this.timeout = setTimeout(()=>{this.allowMove(direction)}, 300);
-    }
-    return bool;
+    this.move.up=false;
+    const { progress } = this.props;
+    const { selectedLevel } = this.state;
+    (selectedLevel)==progress.length-1
+      ? this.setSelectedLevel(0)
+      : this.setSelectedLevel(selectedLevel+1)
+    ;
+    this.centralizeCurrent();
   }
 
   animateScroll(elem, scrollTo) {
