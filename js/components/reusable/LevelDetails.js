@@ -17,7 +17,7 @@ export default class LevelDetails extends Component{
       </p>
     );
   }
-  
+
   componentWillEnter(callback){
     TweenMax.fromTo(
       ReactDOM.findDOMNode(this), .3,
@@ -51,5 +51,5 @@ export default class LevelDetails extends Component{
       </div>
     );
   }
-  
+
 }
