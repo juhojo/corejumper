@@ -11,12 +11,17 @@ import TransitionGroup from 'react-addons-transition-group';
 import _ from 'lodash';
 
 export default class Levels extends SubPage{
+
   grid=null;
   tween=null;
   state = {
     selectedLevel: this.props.selectedLevel,
   }
   move={up:true};
+
+  componentWillMount() {
+    this.gridItemMouseEnterHandler = _.debounce(this.gridItemMouseEnterHandler, 50);
+  }
 
   componentDidMount(nextProps) {
     super.componentDidMount();
@@ -39,14 +44,13 @@ export default class Levels extends SubPage{
         ()=>{this.props.navigate('game')}
       );
     }
-
   }
 
-  setSelectedLevel(selectedLevel, e){
+  setSelectedLevel=(selectedLevel, e)=>{
     this.setState({ selectedLevel });
   }
 
-  gridItemMouseEnterHandler(i,e){
+  gridItemMouseEnterHandler=(i,e)=>{
     if(i!==this.state.selectedLevel){
       this.setSelectedLevel(i);
       this.slideGridItemIntoView(i);
