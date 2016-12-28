@@ -48,6 +48,7 @@ export default class Levels extends SubPage{
 
   gridItemMouseEnterHandler(i,e){
     if(i!==this.state.selectedLevel){
+      this.move.up = i<this.state.selectedLevel;
       this.setSelectedLevel(i);
       this.slideGridItemIntoView(i);
     }
