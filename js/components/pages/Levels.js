@@ -12,6 +12,8 @@ import TransitionGroup from 'react-addons-transition-group';
 export default class Levels extends SubPage{
   grid=null;
   tween=null;
+  clickDate=null;
+  timeout=null;
   state = {
     selectedLevel: this.props.selectedLevel,
   }
@@ -53,25 +55,43 @@ export default class Levels extends SubPage{
   }
 
   moveUp=()=>{
-    this.move.up=true;
-    const { progress } = this.props;
-    const { selectedLevel } = this.state;
-    (selectedLevel)==0
-      ? this.setSelectedLevel(progress.length-1)
-      : this.setSelectedLevel(selectedLevel-1)
-    ;
-    this.centralizeCurrent();
+    if (this.allowMove()) {
+      this.move.up=true;
+      const { progress } = this.props;
+      const { selectedLevel } = this.state;
+      (selectedLevel)==0
+        ? this.setSelectedLevel(progress.length-1)
+        : this.setSelectedLevel(selectedLevel-1)
+      ;
+      this.centralizeCurrent();
+    }
   }
 
   moveDown=()=>{
-    this.move.up=false;
-    const { progress } = this.props;
-    const { selectedLevel } = this.state;
-    (selectedLevel)==progress.length-1
-      ? this.setSelectedLevel(0)
-      : this.setSelectedLevel(selectedLevel+1)
-    ;
-    this.centralizeCurrent();
+    if (this.allowMove()){
+      this.move.up=false;
+      const { progress } = this.props;
+      const { selectedLevel } = this.state;
+      (selectedLevel)==progress.length-1
+        ? this.setSelectedLevel(0)
+        : this.setSelectedLevel(selectedLevel+1)
+      ;
+      this.centralizeCurrent();
+    }
+  }
+
+  allowMove() {
+    let bool = true;
+    this.timeout && clearTimeout(this.timeout);
+    if(this.clickDate && new Date() - this.clickDate < 100) {
+      bool = false;
+    }
+    if(bool) {
+      this.clickDate = new Date();
+    } else {
+      this.timeout = setTimeout(()=>{this.allowMove()}, 300);
+    }
+    return bool;
   }
 
   animateScroll(elem, scrollTo) {
