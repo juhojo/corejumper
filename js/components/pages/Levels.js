@@ -19,7 +19,7 @@ export default class Levels extends SubPage{
   move={up:true};
 
   componentWillMount() {
-    this.gridItemMouseEnterHandler = _.debounce(this.gridItemMouseEnterHandler, 50);
+    this.gridItemMouseEnterHandler = _.debounce(this.gridItemMouseEnterHandler, 100);
   }
 
   componentDidMount(nextProps) {

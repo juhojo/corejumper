@@ -4,7 +4,7 @@ import LargeButton from './LargeButton';
 import TweenMax, {Sine} from 'gsap';
 
 export default class LevelDetails extends Component{
-  animationValues=['20%','80%'];
+  animationValues=['45%','55%'];
 
 
   renderUnlockedAndBeated=selectedLevel=>{
@@ -20,7 +20,7 @@ export default class LevelDetails extends Component{
 
   componentWillEnter(callback){
     TweenMax.fromTo(
-      ReactDOM.findDOMNode(this), .3,
+      ReactDOM.findDOMNode(this), .2,
       {top: this.props.move.up?this.animationValues[0]:this.animationValues[1], opacity: 0},
       {top: '50%', opacity: 1, onComplete: callback, ease: Sine.easeOut}
     );
@@ -28,7 +28,7 @@ export default class LevelDetails extends Component{
 
   componentWillLeave(callback){
     TweenMax.fromTo(
-      ReactDOM.findDOMNode(this), .3,
+      ReactDOM.findDOMNode(this), .1,
       {top: '50%', opacity: 1},
       {top: this.props.move.up?this.animationValues[1]:this.animationValues[0], opacity: 0, onComplete: callback, ease: Sine.easeIn}
     );
