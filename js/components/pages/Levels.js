@@ -55,7 +55,7 @@ export default class Levels extends SubPage{
   }
 
   moveUp=()=>{
-    if (this.allowMove()) {
+    if (this.allowMove(true)) {
       this.move.up=true;
       const { progress } = this.props;
       const { selectedLevel } = this.state;
@@ -68,7 +68,7 @@ export default class Levels extends SubPage{
   }
 
   moveDown=()=>{
-    if (this.allowMove()){
+    if (this.allowMove(false)){
       this.move.up=false;
       const { progress } = this.props;
       const { selectedLevel } = this.state;
@@ -80,16 +80,16 @@ export default class Levels extends SubPage{
     }
   }
 
-  allowMove() {
+  allowMove(direction) {
     let bool = true;
     this.timeout && clearTimeout(this.timeout);
-    if(this.clickDate && new Date() - this.clickDate < 100) {
+    if(this.clickDate && new Date() - this.clickDate < 100 && direction == this.move.up) {
       bool = false;
     }
     if(bool) {
       this.clickDate = new Date();
     } else {
-      this.timeout = setTimeout(()=>{this.allowMove()}, 300);
+      this.timeout = setTimeout(()=>{this.allowMove(direction)}, 300);
     }
     return bool;
   }
