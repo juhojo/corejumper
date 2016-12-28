@@ -22,7 +22,7 @@ export default class LevelDetails extends Component{
     TweenMax.fromTo(
       ReactDOM.findDOMNode(this), .2,
       {top: this.props.move.up?this.animationValues[0]:this.animationValues[1], opacity: 0},
-      {top: '50%', opacity: 1, onComplete: callback, ease: Sine.easeOut}
+      {top: '50%', opacity: 1, onComplete: callback, ease: Sine.easeInOut}
     );
   }
 
@@ -30,7 +30,7 @@ export default class LevelDetails extends Component{
     TweenMax.fromTo(
       ReactDOM.findDOMNode(this), .1,
       {top: '50%', opacity: 1},
-      {top: this.props.move.up?this.animationValues[1]:this.animationValues[0], opacity: 0, onComplete: callback, ease: Sine.easeIn}
+      {top: this.props.move.up?this.animationValues[1]:this.animationValues[0], opacity: 0, onComplete: callback, ease: Sine.easeInOut}
     );
   }
 

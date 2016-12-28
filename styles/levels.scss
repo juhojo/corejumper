@@ -20,7 +20,7 @@ $gridWidth: #{$boxSize+$padding+$scrollbar}vh;
         height: 34.5vh; // grid-height / 2 - box-height / 2 - box-margin-top
       }
     }
-    
+
     & .grid-item {
       display:inline-block; //to avoid vertical margin collapsing
       box-sizing: content-box; //to increase the box size as padding is animated
@@ -30,8 +30,9 @@ $gridWidth: #{$boxSize+$padding+$scrollbar}vh;
       padding: 0;
       border: $borderWidth solid black;
       font-family: arial;
-      font-size: 1.6em;  
-      
+      font-size: 1.6em;
+      cursor: default;
+
       &::before, &::after{
         content: '';
         position: absolute;
@@ -57,7 +58,7 @@ $gridWidth: #{$boxSize+$padding+$scrollbar}vh;
 
       &.selected:not(.locked) {
         animation: pulsing 1.8s infinite;
-      
+
         &::before{
           width: 60%;
         }
@@ -65,7 +66,7 @@ $gridWidth: #{$boxSize+$padding+$scrollbar}vh;
         &::after{
           height: 60%;
         }
-        
+
         & .grid-item-content{
           transform: translate(-50%, -50%) scale(1);
         }
@@ -73,7 +74,7 @@ $gridWidth: #{$boxSize+$padding+$scrollbar}vh;
 
       &.locked.selected{
         animation: pulsing 1.8s infinite;
-        
+
         & .grid-item-content{
           transform: translate(-50%, -50%);
         }
@@ -108,19 +109,19 @@ $gridWidth: #{$boxSize+$padding+$scrollbar}vh;
     position: absolute;
     top: 0;
     left: calc(#{$gridWidth} + 2vh);
-    
+
     width: calc(100% - #{$gridWidth} - 2vh);
     height: 100vh;
 
     text-align: center;
-    
+
     & .container{
       max-height: 100%;
       position: absolute;
       top: 50%;
       left: 50%;
       transform: translate(-50%, -50%);
-      
+
       & h2{
         font-size: 2em;
       }
@@ -137,7 +138,7 @@ $gridWidth: #{$boxSize+$padding+$scrollbar}vh;
     & .grid {
       left: $left;
       width: $gridWidth;
-      
+
       & .grid-item {
         width: #{$boxSize}vh;
         height: #{$boxSize}vh;

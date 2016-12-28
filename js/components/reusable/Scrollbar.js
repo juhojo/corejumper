@@ -66,6 +66,11 @@ export default class Scrollbar extends Component{
     if(!this.dragging) this.updateHandle();
   }
 
+  trackClickHandler=e=>{
+    this.middle.scrollTop=(e.pageY-this.handleHeight)*(this.innerHeight/this.trackHeight);
+    this.updateHandle();
+  }
+
   handleMouseDownHandler=e=>{
     this.dragging=true;
     this.scrollStart=this.middle.scrollTop;
