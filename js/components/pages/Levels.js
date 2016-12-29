@@ -106,7 +106,7 @@ export default class Levels extends SubPage{
     const { progress, setKeybinds, userProgress } = this.props;
     const { selectedLevel } = this.state;
     return (
-      <SubPageContent {...this.props} style={{height: '100%'}} id="levels">
+      <SubPageContent {...this.props} id="levels">
         <div ref="grid" className="grid">
           <Scrollbar>
             {progress.map((level, i) =>

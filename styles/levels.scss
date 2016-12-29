@@ -6,6 +6,10 @@ $gridWidth: #{$boxSize+$padding+$scrollbar}vh;
 
 #levels{
 
+  & .content{
+    height: 100vh;
+  }
+
   .grid {
     position: absolute;
     top: 12vh;

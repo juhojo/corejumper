@@ -18,6 +18,10 @@
     & .scrollbar-container-inner{
       width: 100%;
       padding-right: 4vh;
+      &.center{
+        top: 50%;
+        transform: translateY(-50%);
+      }
     }
   }
 
@@ -28,6 +32,10 @@
     right: 1vh;
     top: 1vh;
     cursor: pointer;
+
+    &.hide{
+      display: none;
+    }
 
     &::before{
       content: '';

@@ -2,6 +2,7 @@ import React, {Component} from 'react';
 import ReactDOM from 'react-dom';
 import { TweenLite, Power3 } from 'gsap';
 import 'ScrollToPlugin'; // Using aliases in webpack.config.js allowes using GASP-plugins
+import classNames from 'classnames';
 
 export default class Scrollbar extends Component{
   outer=null;
@@ -18,6 +19,10 @@ export default class Scrollbar extends Component{
   trackHeight=0;
   handleHeight=0;
   tween=null;
+
+  state={
+    hide: false,
+  }
 
   componentDidMount(){
     this.outer=ReactDOM.findDOMNode(this.refs.outer);
@@ -62,6 +67,8 @@ export default class Scrollbar extends Component{
       : this.trackHeight*percentageVisible;
     this.handle.style.height=this.handleHeight+"px";
 
+    if(this.handleHeight==this.trackHeight && !this.props.showAlways) this.setState({hide:true});
+
     this.updateHandle();
   }
 
@@ -95,14 +102,16 @@ export default class Scrollbar extends Component{
   }
 
   render (){
+    const { hide } = this.state;
+    const { centerUnscrollable } = this.props;
     return (
-      <div className="scrollbar-container-outer" ref="outer">
+      <div className="scrollbar-container-outer" ref="outer" style={this.props.outerStyle}>
         <div className="scrollbar-container-middle" ref="middle">
-          <div className="scrollbar-container-inner" ref="inner">
+          <div className={classNames("scrollbar-container-inner", {center: hide && centerUnscrollable})} ref="inner" style={this.props.innerStyles}>
             {this.props.children}
           </div>
         </div>
-        <div className="scrollbar-track" ref="track">
+        <div className={classNames('scrollbar-track', { hide })} ref="track">
           <div className="scrollbar-handle" ref="handle"></div>
         </div>
       </div>

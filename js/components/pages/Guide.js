@@ -8,10 +8,22 @@ export default class Guide extends SubPage{
     return (
       <SubPageContent {...this.props}>
         <h1>Guide</h1>
-        <p>Avoid obstacles and falling into the center.</p>
-        <p><KeyboardKey>↑</KeyboardKey> or <KeyboardKey>space</KeyboardKey> to jump</p>
-        <p><KeyboardKey>Esc</KeyboardKey> or <KeyboardKey>pause break</KeyboardKey> to pause</p>
-        <p><KeyboardKey>Backspace</KeyboardKey> menu</p>
+        <h2>Objective</h2>
+        <ul>
+          <li>avoid obstacles</li>
+          <li>avoid center</li>
+          <li>collect stars</li>
+          <li>as fast as you can</li>
+        </ul>
+        <h2>Controls on a touch device:</h2>
+        <p>Tap ☟ anywhere to jump</p>
+        <p>Swipe ↔ anywhere to move</p>
+        <h2>Controls on a keyboard:</h2>
+        <p><KeyboardKey>↑</KeyboardKey>/<KeyboardKey>W</KeyboardKey>/<KeyboardKey>space</KeyboardKey> to jump</p>
+        <p><KeyboardKey>←</KeyboardKey><KeyboardKey>→</KeyboardKey>/<KeyboardKey>A</KeyboardKey><KeyboardKey>D</KeyboardKey> to move</p>
+        <p><KeyboardKey>Esc</KeyboardKey>/<KeyboardKey>pause break</KeyboardKey>/<KeyboardKey>Backspace</KeyboardKey> to pause</p>
+        <h2>Navigation</h2>
+        <p>In addition to clicking and tapping, you can navigate all menus using <KeyboardKey>↑</KeyboardKey><KeyboardKey>←</KeyboardKey><KeyboardKey>↓</KeyboardKey><KeyboardKey>→</KeyboardKey> and <KeyboardKey>W</KeyboardKey><KeyboardKey>A</KeyboardKey><KeyboardKey>S</KeyboardKey><KeyboardKey>D</KeyboardKey></p>
       </SubPageContent>
     );
   }
