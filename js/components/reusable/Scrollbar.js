@@ -1,5 +1,7 @@
 import React, {Component} from 'react';
 import ReactDOM from 'react-dom';
+import { TweenLite, Power3 } from 'gsap';
+import 'ScrollToPlugin'; // Using aliases in webpack.config.js allowes using GASP-plugins
 
 export default class Scrollbar extends Component{
   outer=null;
@@ -15,6 +17,7 @@ export default class Scrollbar extends Component{
   innerHeight=0;
   trackHeight=0;
   handleHeight=0;
+  tween=null;
 
   componentDidMount(){
     this.outer=ReactDOM.findDOMNode(this.refs.outer);
@@ -67,11 +70,13 @@ export default class Scrollbar extends Component{
   }
 
   trackClickHandler=e=>{
-    this.middle.scrollTop=(e.pageY-this.handleHeight)*(this.innerHeight/this.trackHeight);
+    this.tween && TweenLite.killTweensOf(this.tween);
+    this.tween = TweenLite.to(this.middle, .3, {scrollTo: (e.pageY-this.handleHeight)*(this.innerHeight/this.trackHeight), ease: Power3.easeInOut});
     this.updateHandle();
   }
 
   handleMouseDownHandler=e=>{
+    document.body.classList.add('grabbing');
     this.dragging=true;
     this.scrollStart=this.middle.scrollTop;
     this.dragStart=e.pageY;
@@ -79,6 +84,7 @@ export default class Scrollbar extends Component{
 
   windowMouseUpHandler=e=>{
     this.dragging=false;
+    document.body.classList.remove('grabbing');
   }
 
   windowMouseMoveHandler=e=>{
