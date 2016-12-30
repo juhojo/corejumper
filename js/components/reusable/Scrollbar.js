@@ -78,7 +78,9 @@ export default class Scrollbar extends Component{
 
   trackClickHandler=e=>{
     this.tween && TweenLite.killTweensOf(this.tween);
-    this.tween = TweenLite.to(this.middle, .3, {scrollTo: (e.pageY-this.handleHeight)*(this.innerHeight/this.trackHeight), ease: Power3.easeInOut});
+    const offsetY = e.pageY - e.target.getBoundingClientRect().top;
+    const percentage = offsetY / this.track.offsetHeight;
+    this.tween = TweenLite.to(this.middle, .3, {scrollTo: (percentage * this.innerHeight - (this.trackHeight/2)), ease: Power3.easeInOut});
     this.updateHandle();
   }
 
