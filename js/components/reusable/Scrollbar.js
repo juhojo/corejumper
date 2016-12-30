@@ -77,11 +77,13 @@ export default class Scrollbar extends Component{
   }
 
   trackClickHandler=e=>{
-    this.tween && TweenLite.killTweensOf(this.tween);
-    const offsetY = e.pageY - e.target.getBoundingClientRect().top;
-    const percentage = offsetY / this.track.offsetHeight;
-    this.tween = TweenLite.to(this.middle, .3, {scrollTo: (percentage * this.innerHeight - (this.trackHeight/2)), ease: Power3.easeInOut});
-    this.updateHandle();
+    if (e.target == this.track) { // Prevent bubbling.
+      this.tween && TweenLite.killTweensOf(this.tween);
+      const offsetY = e.pageY - e.target.getBoundingClientRect().top;
+      const percentage = offsetY / this.track.offsetHeight;
+      this.tween = TweenLite.to(this.middle, .3, {scrollTo: (percentage * this.innerHeight - (this.trackHeight/2)), ease: Power3.easeInOut});
+      this.updateHandle();
+    }
   }
 
   handleMouseDownHandler=e=>{
@@ -92,8 +94,8 @@ export default class Scrollbar extends Component{
   }
 
   windowMouseUpHandler=e=>{
-    this.dragging=false;
     document.body.classList.remove('grabbing');
+    this.dragging=false;
   }
 
   windowMouseMoveHandler=e=>{
