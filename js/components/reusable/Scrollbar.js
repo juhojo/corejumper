@@ -100,7 +100,10 @@ export default class Scrollbar extends Component{
 
   windowMouseMoveHandler=e=>{
     if(this.dragging){
-      this.middle.scrollTop=this.scrollStart-(this.dragStart-e.pageY)*(this.innerHeight/this.trackHeight);
+      this.middle.scrollTop = 
+        this.scrollStart
+        -(this.dragStart-e.pageY)
+        *(this.innerHeight/this.trackHeight);
       this.updateHandle();
     }
   }
@@ -109,13 +112,26 @@ export default class Scrollbar extends Component{
     const { hide } = this.state;
     const { centerUnscrollable } = this.props;
     return (
-      <div className="scrollbar-container-outer" ref="outer" style={this.props.outerStyle}>
+      <div 
+        className="scrollbar-container-outer" 
+        ref="outer" 
+        style={this.props.outerStyle}
+      >
         <div className="scrollbar-container-middle" ref="middle">
-          <div className={classNames("scrollbar-container-inner", {center: hide && centerUnscrollable})} ref="inner" style={this.props.innerStyles}>
+          <div 
+            className="scrollbar-container-inner"
+            ref="inner" 
+            style={this.props.innerStyles}
+          >
             {this.props.children}
           </div>
         </div>
-        <div className={classNames('scrollbar-track', { hide })} ref="track">
+        <div 
+          className={
+            classNames('scrollbar-track', { hide })
+          }
+          ref="track"
+        >
           <div className="scrollbar-handle" ref="handle"></div>
         </div>
       </div>

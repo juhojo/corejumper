@@ -18,10 +18,6 @@
     & .scrollbar-container-inner{
       width: 100%;
       padding-right: 4vh;
-      &.center{
-        top: 50%;
-        transform: translateY(-50%);
-      }
     }
   }
 
